@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="default.css" />
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+ <div class="main">
+
+<h2><font color="blue">Removing Noise from an Image</font></h2>
+
+
+This is a modification of the exam problem.
+<br>
+<br>
+In this modification, only Type 1 noise is processed.
+<br>
+<br>
+For each input, remove from the matrix only the noise blobs of type type 1.<br>
+Do not process or evaluate any of noise blobs of type 2,3, or 4. <br>
+Also, on the last output line print only the number of the removed noise blobs of type 1. See examples below.<br>
+The public data at the bottom of this page are modified accordingly.
+<br>
+<br>
+
+<center>
+<table width="96%">
+	<col width="36%"/>
+	<col width="26%"/>
+	<col width="2%"/>
+	<col width="26%"/>
+    <tr>
+
+<td valign="top">
+	<h3><font color="blue">Example 1</font></h3>
+<b>Input</b><br>
+<pre>
+8 10
+1 2 0 3 2 0 0 4 0 0
+3 0 0 0 1 0 0 0 4 0
+0 0 0 0 0 0 0 0 6 0
+8 0 0 0 0 7 6 0 0 0
+0 0 4 0 0 0 5 0 0 5
+0 4 4 0 0 0 0 0 0 0
+2 0 0 0 6 0 0 0 7 7
+3 1 0 0 4 4 0 0 7 0
+</pre>
+
+<b>Output</b><br>
+<pre>
+1 2 0 3 2 0 0 4 0 0
+3 0 0 0 1 0 0 0 4 0
+0 0 0 0 0 0 0 0 6 0
+8 0 0 0 0 7 6 0 0 0
+0 0 4 0 0 0 5 0 0 5
+0 4 4 0 0 0 0 0 0 0
+2 0 0 0 0 0 0 0 7 7
+3 1 0 0 0 0 0 0 7 0
+1
+</pre>
+
+
+
+</td>
+
+<td valign="top">
+ 	<h3><font color="blue">Example 2</font></h3>
+<b>Input</b><br>
+<pre>
+5 5
+1 2 0 8 7
+3 0 0 0 7
+0 0 9 0 0
+2 0 0 0 6
+3 4 0 4 5
+</pre>
+
+<b>Output</b><br>
+<pre>
+1 2 0 8 7
+3 0 0 0 7
+0 0 9 0 0
+0 0 0 0 6
+0 0 0 4 5
+1
+</pre>
+</td>
+
+<td valign="top">		
+	<h3><font color="blue">Example 3</font></h3>
+<b>Input</b><br>
+<pre>
+17 18
+1 0 0 1 0 0 0 1 4 0 1 2 0 0 1 0 1 1
+1 2 0 1 1 0 0 0 1 0 1 0 0 1 8 0 1 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 1
+0 1 0 2 0 3 0 0 0 0 0 0 0 0 0 0 0 1
+0 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 5 0 0 0 0 0 0 3 0 2 0 0 0 0 0 0 1
+1 1 0 0 0 0 0 3 3 0 2 2 0 0 0 0 3 1
+0 0 0 0 0 0 0 0 0 5 0 0 0 0 0 0 0 0
+3 1 0 0 0 0 0 1 1 0 4 4 0 0 0 0 1 1
+1 0 0 0 0 0 0 0 1 0 4 0 0 0 0 0 1 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 5 0 0 0 0
+1 0 0 0 0 4 4 0 0 0 0 0 6 0 4 0 1 0
+1 1 0 0 0 3 0 0 0 0 0 0 0 4 0 0 5 1
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 1 0 8 1 0 7 1 0 0 1 0 0 0 1 0 1 1
+1 1 0 8 0 0 0 1 0 0 1 1 0 1 4 0 0 1
+</pre>
+
+<b>Output</b><br>
+<pre>
+0 0 0 0 0 0 0 1 4 0 1 2 0 0 1 0 1 1
+0 0 0 0 0 0 0 0 1 0 1 0 0 1 8 0 1 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 1
+0 1 0 2 0 3 0 0 0 0 0 0 0 0 0 0 0 1
+0 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 5 0 0 0 0 0 0 3 0 2 0 0 0 0 0 0 1
+1 1 0 0 0 0 0 3 3 0 2 2 0 0 0 0 3 1
+0 0 0 0 0 0 0 0 0 5 0 0 0 0 0 0 0 0
+3 1 0 0 0 0 0 1 1 0 4 4 0 0 0 0 1 1
+1 0 0 0 0 0 0 0 1 0 4 0 0 0 0 0 1 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 5 0 0 0 0
+0 0 0 0 0 4 4 0 0 0 0 0 6 0 4 0 0 0
+0 0 0 0 0 3 0 0 0 0 0 0 0 4 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 1 0 8 1 0 7 1 0 0 0 0 0 0 1 0 1 1
+1 1 0 8 0 0 0 1 0 0 0 0 0 1 4 0 0 1
+5
+</pre>
+
+
+
+</td>
+
+    </tr>
+</table>
+</center>
+
+
+
+<br>
+<br>
+
+
+
+
+
+<hr>
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking. The public data set is stored also in the upload system and each time a student submits a solution it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="getdata.php?task=z6removingnoiseb&item=datapub.zip"><b>Link to public data set</b></a>
+</p>
+
+</div>
+</body>
+</html>

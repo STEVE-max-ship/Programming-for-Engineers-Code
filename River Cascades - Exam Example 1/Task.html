@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="default.css" />
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+<div class="main">
+
+ <h3><font color="brown">PGE Exam Preparation 01</font></h3>
+
+<b> The problem serves as an example, it can be regularly evaluated in brute, <br>
+however, it is not graded and NO POINTS (neither positive nor negative) in PGE  are assigned to it.</b>
+<br><br>
+
+
+<h2><font color="blue">River Cascades</font></h2>
+
+
+<a href="getdata.php?task=e1cascade&item=desc.pdf">pdf version</a> (Download and rename with .pdf extension.)
+
+<p align="justify">
+
+A map is a rectangular array of integers.
+A river cascade  is a sequence of cells in in the map.
+The cascade cells are all located in either one row or in one column.
+There is a first cell in a cascade. If the cascade is located in a row
+then all cell are located to the right of the first cell.
+If the cascade is located in a column then all cells in the cascade
+are located below the first cell.
+Each next cell in the cascade is adjacent to the previous cell.
+The value in each cell, except for the first cell,
+is bigger by exacly one than the value in the previous cell.
+<br>
+A predecessor cell of a cascade is  a cell which is adjacent to the first cell of the cascade,
+and which lies in the same row or column as the whole cascade and which is not a part
+of the cascade.
+A successor cell of a cascade is  a cell which is adjacent to the last cell of the cascade,
+and which lies in the same row or column as the whole cascade and which is not a part
+of the cascade.
+The value of the predecesor cell, if it exists, is not equal to the
+value of the first cell minus 1.
+The value of the successor cell, if it exists, is not equal to the
+value of the last cell plus 1.
+the length of a cascade is the number of cells in it.
+
+
+<!-- T H E   T A S K  -------------------------------------------------------------------------------------------------------------------- -->
+
+
+<h3><font color="blue">The task</font></h3>
+Count the number of cascades of a given length in the whole input map.
+
+
+ <hr>
+
+<!-- I N P U T  -------------------------------------------------------------------------------------------------------------------- -->
+
+<h3><font color="blue">Input</font></h3>
+<p align="justify">
+The first input line contains three integers R, C, L separated by space.
+They represent, in this order, the number of rows in the map, the number
+of columns in the map and the length of a cascade.
+Next, there are R lines of input, each contains C values separated by spaces.
+Each line contains values of the corresponding map row.
+<br>
+The size of the map does not exceed 100 &times; 100 cells.
+
+</p>
+
+<h3><font color="blue">Output</font></h3>
+<p align="justify">
+There are two output lines, the first line contains the number
+of cascades in the map oriented horizontally and the second line
+contains the number of cascades in the map oriented vertically.
+</p>
+
+
+
+
+<center>
+<table width="95%">
+	<col width="22%"/>
+	<col width="30%"/>
+	<col width="30%"/>
+	<col width="5%"/>
+	<col width="10%"/>
+    <tr>
+
+<td valign="top">
+	<h3><font color="blue">Example 1</font></h3>
+<b>Input</b><br>
+<pre>
+5 8 3
+0 0 0 0 0 0 0 11
+0 2 3 4 0 0 0 12
+0 0 4 0 4 0 6 13
+0 0 5 0 5 6 7 14
+1 2 0 0 6 7 8  0
+</pre>
+
+<b>Output</b><br>
+<pre>
+3
+3
+</pre>
+
+
+</td>
+
+<td valign="top">		
+	<h3><font color="blue">Example 2</font></h3>
+<b>Input</b><br>
+<pre>
+10 20 6
+0 0 0 0 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 4
+0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 2 0 0 1
+0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 5 0 0 2
+0 0 0 0 0 0 0 0 0 0 9 4 5 6 7 8 9 4 1 3
+0 0 0 0 0 0 0 0 6 6 7 5 3 0 2 0 7 0 1 4
+0 0 0 4 4 5 6 7 8 9 6 6 4 0 8 0 8 0 2 5
+0 0 0 0 0 2 0 1 2 3 4 7 5 9 9 0 9 0 3 6
+0 4 3 6 2 3 4 5 6 7 1 6 6 0 2 0 1 0 4 4
+0 0 0 0 3 2 3 4 5 6 7 6 7 0 0 0 0 0 5 0
+0 0 0 0 9 0 0 0 0 0 0 6 8 4 5 6 7 8 2 0
+</pre>
+
+<b>Output</b><br>
+<pre>
+4
+3
+</pre>
+
+
+</td>
+
+<td valign="top">		
+	<h3><font color="blue">Example 3</font></h3>
+<b>Input</b><br>
+<pre>
+15 20 5
+1 2 1 0 0 5 0 0 1 4 5 6 7 4 5 1 2 3 4 9
+0 3 0 0 0 6 0 0 2 1 4 7 3 5 5 2 4 0 6 2
+6 9 8 9 5 5 0 0 3 9 4 2 3 6 6 6 1 0 1 2
+4 2 2 3 4 6 6 7 4 0 5 0 2 7 7 4 0 0 2 3
+3 3 5 6 7 7 1 0 5 1 7 5 2 8 8 5 0 0 5 4
+8 4 0 0 0 8 5 6 7 2 0 0 3 7 9 3 4 5 6 7
+9 5 0 0 8 9 6 3 1 3 1 4 4 5 1 7 8 9 7 6
+2 6 0 8 9 5 6 7 8 4 2 1 5 2 1 4 2 5 6 5
+4 8 0 6 7 4 4 3 5 8 3 2 6 0 2 0 9 2 3 6
+3 5 0 7 8 8 5 0 4 4 4 3 2 8 3 3 3 5 2 7
+4 2 0 1 0 1 2 3 4 0 1 4 2 0 4 0 4 6 3 8
+4 7 6 9 0 3 7 2 4 5 6 5 3 4 5 6 7 9 4 1
+6 8 6 9 3 2 6 4 5 6 7 8 0 0 0 3 6 5 5 7
+7 1 5 0 5 0 7 0 0 0 0 0 5 8 9 2 7 9 6 0
+0 0 6 0 5 2 8 4 5 6 7 1 6 0 0 0 7 9 4 0
+</pre>
+
+<b>Output</b><br>
+<pre>
+4
+11
+</pre>
+</td>
+
+    </tr>
+</table>
+</center>
+
+
+
+
+
+
+
+
+
+
+<hr>
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking.
+The public data set is stored also in the upload system and each time a student submits a solution
+it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="getdata.php?task=e1cascade&item=datapub.zip"><b>Link to the public data set</b></a>
+</p>
+
+</div>
+
+
+</body>
+</html>

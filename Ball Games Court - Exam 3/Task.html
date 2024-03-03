@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="default.css" />
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+<div class="main">
+
+ <h3><font color="brown">PGE Exam Problem</font></h3>
+
+<h2><font color="blue">Ball Games Court</font></h2>
+
+
+<p align="justify">
+
+Quido and Hugo want to build a temporary court for their
+ball games in the university backyard during summer holidays.
+<br>
+<br>
+They divided the backyard into a rectangular grid, each cell of the grid is either empty
+or it contains a tree. Two of the trees will serve as a poles and there will be a net
+held between them. For that reason they decided to call each tree a <b>pole</b>.
+<br>
+<br>
+The <b>court</b> itself will be rectangular area in the grid, consisting of some number of cells.
+The borders of the court will be parallel to the borders of the grid and the court will contain whole cells only.
+<br><br>
+The two poles on which the net will be held, let us call them <b>net poles</b>,
+will be chosen in a particular way:<br>
+Both net poles will be situated in the same row of the grid,
+this row is called the <b>net row</b>.
+<br>
+The number of court cells on one side of the court
+has to be equal to the number of cells on the other side of the court
+with respect to the net row. Putting it simply: The net row divides
+the court exactly in the middle.
+<br>
+The position of the cells with net poles will be adjacent to the court but not inside the court.
+<br><br>
+The court, of course, will not contain any poles.
+No part of the court can be situated outside the grid.
+<br><br>
+
+Given the conditions listed above, the friends want to choose the net poles cells in such way
+that will allow them to <b>maximize the area</b> of the court.
+The area of the court is equal to the number of grid cells in it.
+<br><br>
+
+In the following example schemes, empty cells, cells with poles, and cells of the court
+are represented by dots, O's, and X's, respectively.  (Spaces between cells are added for better readability.)
+
+<br>
+Note that there may be more poles adjacent to the court, not only the net poles.
+Such configuration does not violate the conditions given above.<br>
+Also note, that in extreme cases the court may consist of only the
+cells between the net poles, in the net row.
+<br><br>
+
+Example:
+ <pre>
+O . . . . . . . . .    O . . . . . . . . .    O . . . . . . . . .
+. . . . O . . . O O    . . . . O x x x O O    . . . . O . . . O O
+O . . . . . . . . .    O . . . . . . . . .    O . . . . . . x x .
+. O . . . . O . . O    . O . . . . O . . O    . O . . . . O x x O
+. . . . . . . . . .    . . . . . . . . . .    . . . . . . . x x .
+. . . . . . . . O .    . . . . . . . . O .    . . . . . . . . O .
+O . . . . . O . . .    O . . . . . O . . .    O . . . . . O . . .
+. . . . O . . . . O    . . . . O . . . . O    . . . . O . . . . O
+. . O . . . O O . .    . . O . . . O O . .    . . O . . . O O . .
+. . . . . O . . . .    . . . . . O . . . .    . . . . . O . . . .
+  
+O . . . . . . . . .    O . . . . . . . . .    O . . . . . . . . .
+. . . . O . . . O O    . . . . O . . . O O    . . . . O . . . O O   
+O . . . . . . . . .    O . . . . . . . . .    O . x x x x . . . .   
+. O . . . . O . . O    . O . . . . O . . O    . O x x x x O . . O   
+. . . . . . . . . .    . . . . . . . . . .    . . x x x x . . . .   
+. . . . . . . . O .    . . . . . . . . O .    . . . . . . . . O .   
+O x x x x x O . . .    O . . . . . O . . .    O . . . . . O . . .   
+. . . . O . . . . O    . . . . O x x x x O    . . . . O . . . . O   
+. . O . . . O O . .    . . O . . . O O . .    . . O . . . O O . .   
+. . . . . O . . . .    . . . . . O . . . .    . . . . . O . . . .
+</pre>
+
+In the Example, the grid is depicted in the first scheme, the remaining five schemes represent
+various possible location of the ball game court in the grid.  
+The maximum area of the court is 12 cells, it is reached in the last scheme.
+
+
+<!-- T H E   T A S K  -------------------------------------------------------------------------------------------------------------------- -->
+
+<h3><font color="blue">The task</font></h3>
+
+For the given court scheme, find the maxumum possible area of a ball games court.
+
+ <hr>
+
+
+<!-- I N P U T  -------------------------------------------------------------------------------------------------------------------- -->
+
+<h3><font color="blue">Input</font></h3>
+<p align="justify">
+The first input line contains two positive integers <i>R</i>, <i>C</i> separated by space.
+They represent, in this order, the number of rows in the grid and the number
+of columns in the grid.  <br>
+Next, there are <i>R</i> lines of input, each contains <i>C</i> values separated by spaces.
+Each line contains values of the corresponding grid row.
+Empty cells are represented by zeroes, cells with poles are represented by ones.
+<br>
+The size of the grid is at most 1000 &times; 1000.
+</p>
+
+<h3><font color="blue">Output</font></h3>
+<p align="justify">
+The output contains one text line with one integer: The maximum possible area of a
+ball games court built in the given input grid.
+<br>
+It is guaranteed that the output area is always positive in the problem data.
+</p>
+
+
+
+
+
+<center>
+<table width="95%">
+	<col width="25%"/>
+	<col width="25%"/>
+	<col width="30%"/>
+	<col width="5%"/>
+	<col width="10%"/>
+    <tr>
+
+<td valign="top">
+	<h3><font color="blue">Example 1</font></h3>
+<b>Input</b><br>
+<pre>
+10 10
+1 0 0 0 0 0 0 0 0 0
+0 0 0 0 1 0 0 0 1 1
+1 0 0 0 0 0 0 0 0 0
+0 1 0 0 0 0 1 0 0 1
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 1 0
+1 0 0 0 0 0 1 0 0 0
+0 0 0 0 1 0 0 0 0 1
+0 0 1 0 0 0 1 1 0 0
+0 0 0 0 0 1 0 0 0 0
+</pre>
+
+<b>Output</b><br>
+<pre>
+12
+</pre>
+
+</td>
+
+<td valign="top">
+	<h3><font color="blue">Example 2</font></h3>
+<b>Input</b><br>
+<pre>
+8 10
+0 0 1 0 0 0 0 0 0 1
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 1 0
+1 0 1 0 0 0 0 0 1 0
+0 0 1 0 0 0 0 0 0 0
+0 0 1 0 0 0 0 0 0 1
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 1 0 1 0 0 0
+</pre>
+
+<b>Output</b><br>
+<pre>
+35
+</pre>
+
+
+</td>
+
+<td valign="top">		
+	<h3><font color="blue">Example 3</font></h3>
+<b>Input</b><br>
+<pre>
+20 30
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1
+0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+</pre>
+
+<b>Output</b><br>
+<pre>
+63
+</pre>
+</td>
+
+    </tr>
+</table>
+</center>
+
+
+The following schemes  depict the location of the solution ball games court in the Examples 1, 2, 3.
+<pre>
+O . . . . . . . . .       . . O x x x x x . O       . . . . . . . . . . . . . . O . . . . . . . O . . . . . . O
+. . . . O . . . O O       . . . x x x x x . .       . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+O . x x x x . . . .       . . . x x x x x O .       . O . . . . . . . . . . . . O . . . . . . . x x x x x x x .
+. O x x x x O . . O       O . O x x x x x O .       . . . . . . . . . . . . . . . . . . . . . . x x x x x x x .
+. . x x x x . . . .       . . O x x x x x . .       . . . . . . . . . . . . . . . . . O . O . . x x x x x x x .
+. . . . . . . . O .       . . O x x x x x . O       . . . . . . . . . . . . . . . . . . . . . . x x x x x x x .
+O . . . . . O . . .       . . . x x x x x . .       . . . . . . . . . . . . . . . . . . . . . O x x x x x x x O
+. . . . O . . . . O       . . . . O . O . . .       . O . . . O . . . . . . . . . . . . . . . . x x x x x x x .
+. . O . . . O O . .                                 . . . . . . . . . . . . . . . O . . . . . . x x x x x x x .
+. . . . . O . . . .                                 . . . . . . . . . . . . . . . . . . . . . . x x x x x x x .
+                                                    . . O . . . . . . . . . . . . . . . . . . . x x x x x x x .
+                                                    . . . . . . . . . . . . . . . . . . . . . . . . O . . . . .
+                                                    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                    . . . . . . . . . . . . . . . . O . . . . . . . . . . . . .
+                                                    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                    . . . . . . . . . . . . . . O . . . . . . . . . . . . . . .
+                                                    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                    . . . . . . . . . . . . O . . O . . . . . . . . . . . . . .
+</pre>
+
+
+
+<!---
+--->
+
+
+<hr>
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking.
+The public data set is stored also in the upload system and each time a student submits a solution
+it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="getdata.php?task=z3zballgamescourt&item=datapub.zip"><b>Link to the public data set</b></a>
+</p>
+
+</div>
+
+
+</body>
+</html>

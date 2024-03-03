@@ -1,0 +1,353 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="default.css" />
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+ <div class="main">
+
+<h2><font color="blue">Moving robots</font></h2>
+<a href="getdata.php?task=movrob&item=desc.pdf">pdf version</a> (Download and rename with .pdf extension.) <br><br>
+
+The experimental rectangular grid consists of  M rows of cells, each rows contains N cells.
+<br>
+There are two experimental robots, Robot1 and Robot2, operating in the grid.
+The movement of each robot is regulated by its own set of commands.
+<br>
+<br>
+The operation of robots in the grid is divided into C cycles.
+<br>
+In each cycle, Robot1 executes one command from its command sequence and then Robot2 executes one
+command from its command sequence.
+In the first cycle, each robot executes the first command in its command sequence.
+In the second cycle, each robot executes the second command in its command sequence, and so on.
+When in some cycle a robot executes the last command in its command sequence,
+in the next cycle this robot jumps to the beginning of its command sequence and executes the first command in it
+and in the subsequent cycles it performs the subsequent commands in the sequence.
+<br>
+In other words, each robot loops through its sequence of commands during the whole process,
+executing one command in each cycle.
+<br>
+<br>
+Each robot is always heading in one of the four principal grid directions:
+East, North, West or South.<br>
+A command has three possible forms. <br>
+&nbsp;&nbsp;L command tells the robot to rotate 90 degrees counterclockwise (to the left) in its current
+cell and perform no more action.<br>
+&nbsp;&nbsp;R command tells the robot to rotate 90 degrees clockwise (to the right) in its current
+cell and perform no more action.<br>
+&nbsp;&nbsp;A numerical command, which consists of a single positive integer I, tells robot to
+move forward in its current heading by I cells.<br><br>
+
+When a robot is issued a numerical command it may not complete the command due to an obstacle in front of it.
+A robot can always move only into an empty cell,
+it cannot move to a cell occupied by the other robot and it also cannot break through the field border.
+Therefore, if the movement of the robot is blocked by the other robot or by the field border,
+the robot just stops in the last free cell before the obstacle and performs no other action in the current cycle.
+<br>
+For example, when a command tells robot to move 6 cells towards the field border and there are only
+4 free cells between the robot and the border, the robot will move through first 3 free cells and end
+its movement in the fourth cell, facing directly the border.
+In an extreme case, the robot may not move at all after a particular numerical command,
+namely when it already directly faces the field border or a cell occupied by the other robot.
+<br>
+A robot can always turn itself in its cell, no matter  where is the other robot or the  field border
+relative to the robot.
+
+
+
+<h3><font color="blue">The task</font></h3>
+<p align="justify">
+</p>
+You are given initial positions of both robots in the given grid and the command sequence of each robot.
+Calculate the total number of cells visited at least once by at least one robot.
+A cell visited multiple times always counts only once in the resulting total.
+<hr>
+
+
+<h3><font color="blue">Input</font></h3>
+<p align="justify">
+The first input line contains three integers N, M and C, representing (in this order)
+the number of columns in the grid, the number of rows in the grid, and the number of cycles
+to be executed by the robots. The rows and columns are indexed from 1 to M and N, respectively.<br>
+The second line contains three integers X, Y, and H. The values X and Y specify the column and the row of the
+initial position of the first robot. 
+Value H specifies the initial heading of the first robot, it can attain one of four values 0,1,2,3, representing,
+in this order, East, North, West and South headings.
+The third line contains the sequence of commands of the first robot.
+The items in the sequence are either characters 'L' or 'R' or integers. Each item represents one command.
+All items are separated by space.
+<br>
+The fourth line specifies the column and the row of the initial position and the initial heading of the second robot,
+the fifth line specifies the sequence of commands of the second robot.
+The specification is given in the same format as for the first robot.
+<br>
+It holds, 2 &le; M, N &le; 100,   2 &le; <i>C</i> &le; 1000. Each integer in a list of commands is positive and less than 1000.
+</p>
+
+
+<h3><font color="blue">Output</font></h3>
+<p align="justify">
+The output consists of a single text line containing the total number of 
+visited cells in all performed cycles.
+</p>
+
+
+<h3><font color="blue">Example 1</font></h3>
+<b>Input</b><br>
+<pre>
+8 6 5
+2 4 0
+4 L 2 L
+6 1 1
+6 5 R
+</pre>
+
+<b>Output</b><br>
+<pre>
+16
+</pre>
+
+
+
+
+<!-- EXAMPLE 2 -------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+<h3><font color="blue">Example 2</font></h3>
+<b>Input</b><br>
+<pre>
+8 6 10
+2 4 0
+4 L 2 L
+6 1 1
+6 5 R
+</pre>
+
+
+
+<b>Output</b><br>
+<pre>
+24
+</pre>
+
+Note that Example 2 differs from Example 1 only by the number of cycles to be performed, all other parameters
+are the same in both Examples.
+
+<!-- EXAMPLE 3 -------------------------------------------------------------------------------------------------------------------- -->
+
+
+ <h3><font color="blue">Example 3</font></h3>
+
+<b>Input</b><br>
+<pre>
+7 7 20
+2 2 1
+4 R
+6 6 3
+4 R 3 R
+</pre>
+
+<b>Output</b><br>
+<pre>
+19
+</pre>
+
+<hr>
+
+<pre>
+Step by step illustration of the robots movements in the grid in Examples 1 and 2.
+Note that the cell with coordinates (1,1) is located in the bottom left corner of a scheme.
+The robots are indicated by their nubers and a symbol showing the heading of the robot.
+The visited cells are marked by symbols '+' (plus), the unvisited cells ar marked by '.' (dot).
+
+Example 1                     cycle 2 ------------------       cycle 4 ------------------
+                                 robot 1 command L                robot 1 command L
+                                 .  .  .  .  .  .  .  .           .  .  .  .  . 1<  .  .
+                                 .  .  .  .  .  .  .  .           .  .  .  .  .  +  .  .
+                                 .  +  +  +  + 1^  .  .           .  +  +  +  +  +  .  .
+                                 .  .  .  .  . 2^  .  .           .  .  .  .  . 2>  .  .
+                                 .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .
+                                 .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .
+Initial configuration            robot 2 command 5                robot 2 command 6
+  .  .  .  .  .  .  .  .         .  .  .  .  .  .  .  .           .  .  .  .  . 1<  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  .  .  .  .           .  .  .  .  .  +  .  .
+  . 1>  .  .  .  .  .  .         .  +  +  +  + 1^  .  .           .  +  +  +  +  +  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  . 2^  .  .           .  .  .  .  .  +  + 2>
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .
+  .  .  .  .  . 2^  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .
+                               cycle 3 ------------------       cycle 5 ------------------
+cycle 1 ------------------       robot 1 command 2                robot 1 command 4
+  robot 1 command 4              .  .  .  .  . 1^  .  .           . 1<  +  +  +  +  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .
+  .  .  .  .  .  .  .  .         .  +  +  +  +  +  .  .           .  +  +  +  +  +  .  .
+  .  +  +  +  + 1>  .  .         .  .  .  .  . 2^  .  .           .  .  .  .  .  +  + 2>
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .
+  .  .  .  .  . 2^  .  .         robot 2 command R                robot 2 command 5
+  robot 2 command 6              .  .  .  .  . 1^  .  .           . 1<  +  +  +  +  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .
+  .  .  .  .  .  .  .  .         .  +  +  +  +  +  .  .           .  +  +  +  +  +  .  .
+  .  +  +  +  + 1>  .  .         .  .  .  .  . 2>  .  .           .  .  .  .  .  +  + 2>
+  .  .  .  .  . 2^  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .
+  .  .  .  .  .  +  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .
+  .  .  .  .  .  +  .  .
+
+
+Example 2                      cycle 3 ------------------       cycle 6 ------------------      cycle 9 ------------------
+                                 robot 1 command 2                robot 1 command L               robot 1 command 4
+                                 .  .  .  .  . 1^  .  .           . 1v  +  +  +  +  .  .          .  +  +  +  +  +  .  .
+                                 .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .          .  +  .  .  .  +  .  .
+                                 .  +  +  +  +  +  .  .           .  +  +  +  +  +  .  .          .  +  +  +  + 1>  .  .
+                                 .  .  .  .  . 2^  .  .           .  .  .  .  .  +  + 2>          .  .  .  .  .  +  +  +
+                                 .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .          .  .  .  .  .  +  .  +
+                                 .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .          .  .  .  .  .  +  . 2v
+ Initial configuration           robot 2 command R                robot 2 command R               robot 2 command R
+  .  .  .  .  .  .  .  .         .  .  .  .  . 1^  .  .           . 1v  +  +  +  +  .  .          .  +  +  +  +  +  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .          .  +  .  .  .  +  .  .
+  . 1>  .  .  .  .  .  .         .  +  +  +  +  +  .  .           .  +  +  +  +  +  .  .          .  +  +  +  + 1>  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  . 2>  .  .           .  .  .  .  .  +  + 2v          .  .  .  .  .  +  +  +
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .          .  .  .  .  .  +  .  +
+  .  .  .  .  . 2^  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .          .  .  .  .  .  +  . 2<
+cycle 1 ------------------     cycle 4 ------------------       cycle 7 ------------------      cycle 10 ------------------
+  robot 1 command 4              robot 1 command L                robot 1 command 2               robot 1 command L
+  .  .  .  .  .  .  .  .         .  .  .  .  . 1<  .  .           .  +  +  +  +  +  .  .          .  +  +  +  +  +  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  +  .  .  .  +  .  .          .  +  .  .  .  +  .  .
+  .  +  +  +  + 1>  .  .         .  +  +  +  +  +  .  .           . 1v  +  +  +  +  .  .          .  +  +  +  + 1^  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  . 2>  .  .           .  .  .  .  .  +  + 2v          .  .  .  .  .  +  +  +
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .          .  .  .  .  .  +  .  +
+  .  .  .  .  . 2^  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  .          .  .  .  .  .  +  . 2<
+  robot 2 command 6              robot 2 command 6                robot 2 command 6               robot 2 command 6
+  .  .  .  .  .  .  .  .         .  .  .  .  . 1<  .  .           .  +  +  +  +  +  .  .          .  +  +  +  +  +  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  +  .  .  .  +  .  .          .  +  .  .  .  +  .  .
+  .  +  +  +  + 1>  .  .         .  +  +  +  +  +  .  .           . 1v  +  +  +  +  .  .          .  +  +  +  + 1^  .  .
+  .  .  .  .  . 2^  .  .         .  .  .  .  .  +  + 2>           .  .  .  .  .  +  +  +          .  .  .  .  .  +  +  +
+  .  .  .  .  .  +  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  +          .  .  .  .  .  +  .  +
+  .  .  .  .  .  +  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  . 2v          . 2<  +  +  +  +  +  +
+cycle 2 ------------------     cycle 5 ------------------       cycle 8 ------------------
+  robot 1 command L              robot 1 command 4                robot 1 command L
+  .  .  .  .  .  .  .  .         . 1<  +  +  +  +  .  .           .  +  +  +  +  +  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  +  .  .  .  +  .  .
+  .  +  +  +  + 1^  .  .         .  +  +  +  +  +  .  .           . 1>  +  +  +  +  .  .
+  .  .  .  .  . 2^  .  .         .  .  .  .  .  +  + 2>           .  .  .  .  .  +  +  +
+  .  .  .  .  .  +  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  +
+  .  .  .  .  .  +  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  . 2v
+  robot 2 command 5              robot 2 command 5                robot 2 command 5
+  .  .  .  .  .  .  .  .         . 1<  +  +  +  +  .  .           .  +  +  +  +  +  .  .
+  .  .  .  .  .  .  .  .         .  .  .  .  .  +  .  .           .  +  .  .  .  +  .  .
+  .  +  +  +  + 1^  .  .         .  +  +  +  +  +  .  .           . 1>  +  +  +  +  .  .
+  .  .  .  .  . 2^  .  .         .  .  .  .  .  +  + 2>           .  .  .  .  .  +  +  +
+  .  .  .  .  .  +  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  .  +
+  .  .  .  .  .  +  .  .         .  .  .  .  .  +  .  .           .  .  .  .  .  +  . 2v
+
+
+
+
+
+
+
+
+
+
+Example 3
+
+Initial configuration
+  .  .  .  .  .  .  .
+  .  .  .  .  . 2v  .
+  .  .  .  .  .  .  .
+  .  .  .  .  .  .  .
+  .  .  .  .  .  .  .
+  . 1^  .  .  .  .  .
+  .  .  .  .  .  .  .
+cycle 1 ---------------   cycle 5 ---------------   cycle 9 ---------------   cycle 13 ---------------   cycle 17 --------------
+  robot 1 command 4         robot 1 command 4         robot 1 command 4         robot 1 command 4          robot 1 command 4    
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  . 1^  .  .  . 2v  .       .  +  +  +  +  +  .       . 1^  +  +  + 2v  .       .  +  +  +  +  +  .        . 1^  +  +  + 2v  .  
+  .  +  .  .  .  .  .       .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  .  .       .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  .  .       .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  .  .       .  + 2^  +  + 1v  .       .  +  +  +  +  +  .       .  + 2^  +  + 1v  .        .  +  +  +  +  +  .  
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  robot 2 command 4         robot 2 command 4         robot 2 command 4         robot 2 command 4          robot 2 command 4    
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  . 1^  .  .  .  +  .       .  + 2^  +  +  +  .       . 1^  +  +  +  +  .       .  + 2^  +  +  +  .        . 1^  +  +  +  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  . 2v  .       .  +  +  +  + 1v  .       .  +  +  +  + 2v  .       .  +  +  +  + 1v  .        .  +  +  +  + 2v  .  
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+cycle 2 ---------------   cycle 6 ---------------   cycle 10 ---------------  cycle 14 ---------------   cycle 18 --------------
+  robot 1 command R         robot 1 command R         robot 1 command R         robot 1 command R          robot 1 command R    
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  . 1>  .  .  .  +  .       .  + 2^  +  +  +  .       . 1>  +  +  +  +  .       .  + 2^  +  +  +  .        . 1>  +  +  +  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .
+  .  +  .  .  . 2v  .       .  +  +  +  + 1<  .       .  +  +  +  + 2v  .       .  +  +  +  + 1<  .        .  +  +  +  + 2v  .  
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  robot 2 command R         robot 2 command R         robot 2 command R         robot 2 command R          robot 2 command R    
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  . 1>  .  .  .  +  .       .  + 2>  +  +  +  .       . 1>  +  +  +  +  .       .  + 2>  +  +  +  .        . 1>  +  +  +  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  . 2<  .       .  +  +  +  + 1<  .       .  +  +  +  + 2<  .       .  +  +  +  + 1<  .        .  +  +  +  + 2<  .  
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+cycle 3 ---------------   cycle 7 ---------------   cycle 11 ---------------  cycle 15 ---------------   cycle 19 --------------
+  robot 1 command 4         robot 1 command 4         robot 1 command 4         robot 1 command 4          robot 1 command 4    
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  .  +  +  +  + 1>  .       .  + 2>  +  +  +  .       .  +  +  +  + 1>  .       .  + 2>  +  +  +  .        .  +  +  +  + 1>  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  . 2<  .       . 1<  +  +  +  +  .       .  +  +  +  + 2<  .       . 1<  +  +  +  +  .        .  +  +  +  + 2<  .  
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  robot 2 command 3         robot 2 command 3         robot 2 command 3         robot 2 command 3          robot 2 command 3    
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  .  +  +  +  + 1>  .       .  +  +  +  + 2>  .       .  +  +  +  + 1>  .       .  +  +  +  + 2>  .        .  +  +  +  + 1>  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  + 2<  +  +  +  .       . 1<  +  +  +  +  .       .  + 2<  +  +  +  .       . 1<  +  +  +  +  .        .  + 2<  +  +  +  .  
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+cycle 4 ---------------   cycle 8 ---------------   cycle 12 ---------------  cycle 16 ---------------   cycle 20 --------------
+  robot 1 command R         robot 1 command R         robot 1 command R         robot 1 command R          robot 1 command R    
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  .  +  +  +  + 1v  .       .  +  +  +  + 2>  .       .  +  +  +  + 1v  .       .  +  +  +  + 2>  .        .  +  +  +  + 1v  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  + 2<  +  +  +  .       . 1^  +  +  +  +  .       .  + 2<  +  +  +  .       . 1^  +  +  +  +  .        .  + 2<  +  +  +  .  
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  robot 2 command R         robot 2 command R         robot 2 command R         robot 2 command R          robot 2 command R    
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .  
+  .  +  +  +  + 1v  .       .  +  +  +  + 2v  .       .  +  +  +  + 1v  .       .  +  +  +  + 2v  .        .  +  +  +  + 1v  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  +  .  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .       .  +  +  .  .  +  .        .  +  +  .  .  +  .  
+  .  + 2^  +  +  +  .       . 1^  +  +  +  +  .       .  + 2^  +  +  +  .       . 1^  +  +  +  +  .        .  + 2^  +  +  +  .  
+  .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .       .  .  .  .  .  .  .        .  .  .  .  .  .  .
+
+
+</pre>
+
+
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking. The public data set is stored also in the upload system and each time a student submits a solution it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="getdata.php?task=movrob&item=datapub.zip"><b>Link to public data set</b></a>
+</p>
+
+
+
+</div>
+
+
+
+</body>
+</html>

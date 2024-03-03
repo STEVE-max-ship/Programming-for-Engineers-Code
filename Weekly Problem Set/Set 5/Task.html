@@ -1,0 +1,436 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="default.css" />
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+ <div class="main">
+
+<h2><font color="blue">PGE Practices 05</font></h2>
+<p align="justify">
+
+<pre>
+
+import time
+import random
+
+# practices 05
+
+# Common input format
+# -------------------
+# (Read the tasks descriptions below before reading this paragraph.)
+# All tasks in practices 05 set share common data input format:
+# The first line contains the number of the task (1 - 5).
+# The second line contains the number N of lists in the input.
+# In tasks 1-4, 0 < N < 6.  In task 5, 0 < N < 12 and N is even.
+# Next, there are N lines of input, each contains one input list.
+# Each list consists only of integers. List entries are separated by single space,
+# there are no other symbols on the input line.
+# The input always contain exactly one data set of one task.
+# In the evaluation system, the code is run repeatedly, each time with different input
+# from which the running program reads the data.
+
+# Solution code structure
+# -----------------------
+# The code reads the input data, including the number of the task.
+# Next, it runs a function or a block of code which accepts the input data
+# and computes and prints the solution to it.
+# It is recommended to wrap the solution of each task in a separate function,
+# an example (not obligatory!) structure of the code
+# is illustrated by the contents of this file.
+
+# ================================================================================
+# Task 01
+
+'''
+In this problem, ranges are denoted in python style,
+e.g. range(2, 5) spans indices 2,3,4, but not 5.
+A given input array (list) consists of 3*N consecutive cells, N > 0.
+Positions in range(0, N) are filled with N integers in radom order,
+each of those integers is either 1 or 2.
+The rest of the array is filled with 0.
+The storage area for 1's is range(N, 2*N)
+The storage area for 2's is range(2*N, 3*N).
+
+A robot R is moving through the array, in each steps it moves from its current cell
+to one of the adjacent cells.
+When moving from a cell with index A to a cell with index B, the robot makes |A-B| steps.
+The task of the robot is to move all values from range(0, N) to their
+corresponding storage areas.
+
+Robot works in cycles. In one cycle, robot
+   -  moves to the rightmost cell with a non-zero value X, in range(0, N),
+   -  stores 0 in that cell,
+   -  moves to the leftmost cell containing 0 in the storage area for X,
+   -  stores X in that cell.
+
+Robot starts in cell with index 0.
+Robot repeats one cycle after another, until range(0, N) contains only 0's.
+
+Remark: Sroring a value X in a cells means that the original value in the cell is
+overwritten by X.
+
+The task
+Count the number of robot steps in the whole process.
+Print the result on a separate line.
+The value of N does not exceed 20000.
+
+Example
+  Input
+1
+4
+1 2 2 1 1 0 0 0 0 0 0 0 0 0 0
+2 2 2 0 0 0 0 0 0
+2 1 2 1 2 1 0 0 0 0 0 0 0 0 0 0 0 0
+2 2 1 1 2 2 0 0 0 0 0 0 0 0 0 0 0 0
+  Output
+59
+32
+86
+99
+
+  Comment on the first list
+
+After each cycle, the location of the robot (R), the contents of the array,
+and the number of robot steps in that cycle is shown below.
+Spaces are added for better visual clarity.
+
+            R
+1 2 2 1 0   1 0 0 0 0   0 0 0 0 0     5
+
+              R
+1 2 2 0 0   1 1 0 0 0   0 0 0 0 0     5
+
+                        R
+1 2 0 0 0   1 1 0 0 0   2 0 0 0 0     12
+
+                          R
+1 0 0 0 0   1 1 0 0 0   2 2 0 0 0     19
+
+                R
+0 0 0 0 0   1 1 1 0 0   2 2 0 0 0     18
+'''
+
+def task01( arr ):
+    # your solution here
+    pass
+
+'''
+# ------------------------------------------------------------------------------
+Task02
+
+In this problem, ranges are denoted in python style,
+e.g. range(2, 5) spans indices 2,3,4, but not 5.
+A given input array (list) consists of 2*N consecutive cells, N > 0.
+Positions in range(0, N) are filled with N positive integers in random order,
+no two values are the same.
+The rest of the array is filled with 0.
+
+A robot R is moving through the array, in each steps it moves from its current cell
+to one of the ajacent cells.
+When moving from a cell with index A to a cell with index B, the robot makes |A-B| steps.
+The task of the robot is to move all values from range(0, N)
+to range(N, 2*N). When the task is finished, the values in range(N, 2*N) are
+sorted in ascending order and range(0, N) contains only 0's.
+
+Robot works in cycles. In one cycle, robot
+   -  moves to the cell which contains the smallest non-zero value X in range(0, N),
+   -  stores 0 in that cell,
+   -  moves to the leftmost cell containing 0 in range(N, 2*N),
+   -  stores X in that cell.
+
+Robot starts in cell with index 0.
+Robot repeats one cycle after another, until range(0, N) contains only 0's.
+
+The task
+Count the number of robot steps in the whole process.
+Print the result on a separate line.
+The value of N does not exceed 20000.
+
+Example
+  Input
+2
+4
+28 18 8 11 1 19 26 13 2 12 0 0 0 0 0 0 0 0 0 0
+1 2 3 4 5 6 0 0 0 0 0 0
+6 5 4 3 2 1 0 0 0 0 0 0
+2 1 4 3 6 5 8 7 0 0 0 0 0 0 0 0
+  Output
+189
+61
+71
+115
+
+  Comment on the first list
+After each cycle, the location of the robot (R), the contents of the array,
+and the number of robot steps in that cycle is shown below.
+Spaces are added for better visual clarity.
+
+                             R
+28 18 8 11 0 19 26 13 2 12   1 0 0  0  0  0  0  0  0  0     10
+                               R
+28 18 8 11 0 19 26 13 0 12   1 2 0  0  0  0  0  0  0  0      5
+                                 R
+28 18 0 11 0 19 26 13 0 12   1 2 8  0  0  0  0  0  0  0     19
+                                    R
+28 18 0  0 0 19 26 13 0 12   1 2 8 11  0  0  0  0  0  0     19
+                                       R
+28 18 0  0 0 19 26 13 0  0   1 2 8 11 12  0  0  0  0  0      9
+                                          R
+28 18 0  0 0 19 26  0 0  0   1 2 8 11 12 13  0  0  0  0     15
+                                             R
+28  0 0  0 0 19 26  0 0  0   1 2 8 11 12 13 18  0  0  0     29
+                                                R
+28  0 0  0 0  0 26  0 0  0   1 2 8 11 12 13 18 19  0  0     23
+                                                   R
+28  0 0  0 0  0  0  0 0  0   1 2 8 11 12 13 18 19 26  0     23
+                                                      R
+ 0  0 0  0 0  0  0  0 0  0   1 2 8 11 12 13 18 19 26 28     37
+'''
+
+
+def task02( arr ):
+    # your solution here
+    pass
+
+# ------------------------------------------------------------------------------
+
+'''
+Task 03
+
+An unordered k-tuple in a list L is a multiset of k values (some values may be equal),
+each of which appears at a diferent position in L. For example,
+  L = [1, 2, 3, 3, 4].  Some 3-tuples in L are {1,2,3}, {1,2,4} {2,3,3}.
+  Note that multisets {2,2,3}, {4,4,4}, {1,1,2} etc.  are not 3-tuples in L.
+The number of all unordered k-tuples in a list L of length N
+is easy to compute, it is equal to binomial coefficient(N, k) = N! // (k!*(N-k)!).
+Typically, we list the items in the k-tuple in the order in which they appear in L.
+
+
+The task
+Find the number of such 3-tuples in a list L, each of which contains exactly two equal values.
+Print the result on a separate line.
+The length of L does not exceed 20000.
+
+Example
+  Input
+  3
+  4
+  7 7 7 4 4 1
+  8 1 7 2 6 3 5 4 8
+  1 2 3 1 2 3 1 2 3
+  2 2 2 2 4 4 4 4
+  Output
+  13
+  7
+  54
+  48
+
+  Comment
+  All 20 unordered 3-tuples in the first list are listed below, by asterisk are marked
+  those which contain exactly two equal values :
+   1 {7,7,7}         6 {7,7,4} *      11 {7,7,4} *      16 {7,4,1}
+   2 {7,7,4} *       7 {7,7,1} *      12 {7,7,4} *      17 {7,4,4} *
+   3 {7,7,4} *       8 {7,4,4} *      13 {7,7,1} *      18 {7,4,1}
+   4 {7,7,1} *       9 {7,4,1}        14 {7,4,4} *      19 {7,4,1}
+   5 {7,7,4} *      10 {7,4,1}        15 {7,4,1}        20 {4,4,1} *
+
+Hint
+A most straightforward solution is to generate physically all possible 3-tuples,
+select the appropriate ones, and count their number.
+In Python, that can be achived by two lines of code:
+   from itertools import combinations
+   print( len( [x for x in combinations(L, 3) if x.count(x[0])==2 or x.count(x[1])==2] ) )
+However, such approach is also less effective.
+Note that the order of values in L does not matter.
+It is only important how many times a particular value appears in the list.
+Thus maybe there is some favourable order of values in L?
+Or maybe even any particular order is unimportant, after all?
+'''
+
+def task03( L ):
+    # your solution here
+    pass
+
+# ------------------------------------------------------------------------------
+# Task 04
+
+'''
+Significance of an item I in a list A is equal to
+the number of items with value I//2 located to the left of I
+plus the number of items with value I*2 located to the right of I.
+
+The task
+Calculate the significances of all items in A.
+Print item significances in the order of their corresponding items in A.
+The length of A does not exceed 40000.
+
+
+Example
+  Input
+4
+5
+5 5 5 10 20 20
+10 20 30 40 50 60 70 80
+1 1 2 2 4 4 8 8 16 16 32 32
+1 2 1 3 2 6 3 2 4 6
+11 22 11 22 44 88 44 88 44
+  Output
+1 1 1 5 1 1
+1 2 1 2 0 1 0 1
+2 2 4 4 4 4 4 4 4 4 2 2
+3 2 2 4 3 1 3 3 3 2
+2 4 1 5 4 1 3 2 2
+
+Hint:
+  In python, with the help of list comprehension, all significances can be
+  computed on one line, e.g by statement
+     signif = [ A[:i].count(A[i]//2) + A[i:].count(A[i]*2) for i in range(len(A)) ].
+  However, for each separate value i, the statement scans and checks all items
+  in the entire list A. Thus, to finish the task, the program has to inspect
+  N times the entire list of N items, when the length of the list is N.
+  That is N*N item inspections in total.
+
+  An alternative way of solution may depend on binary search.
+  Imagine, that there is an additional list B of all values which appear in A.
+  Each value X in B is associated with a sorted list of *all positions*
+  at which X appears in A.
+  Now, when calculating a significance of an item A[i] at position i,
+  first find A[i]//2 in B with the help of binary search,
+  and then count all positions of A[i]//2 to the left of i.
+  This last counting can be again done effectively with the help
+  of the list of positions associated with A[i]//2 in B, and another binary search in it.
+
+  Also, instead of list B, you may try to employ a dictionary B of positions of item values.
+'''
+
+def task04( A ):
+    # your solution here
+    pass
+
+
+# ------------------------------------------------------------------------------
+'''
+Task 05
+
+
+An informal description of the problem, by a purpotedly "real life" situation,
+may help to grasp quickly the abstract core of the problem.
+Nonetheless, it does not quarantee better understanding
+or better choice of an appropriate solution method.
+But still, if presented correctly, it simplifies formulation of one's own ideas,
+and that speeds up the entire solution process..., sometimes. :-)
+
+There is a group A of sport trainers and a group B of students.
+Each person in both groups is an owner of some number of dogs fit for a sledge race.
+A racing team consists of one trainer and two students, each person in the team
+has to bring all their dogs to the race.
+However, the number of dogs in one team is strictly prescribed,
+it has to be exactly  S dogs (S > 0).
+Therefore, when a trainer wants to choose a pair of students who
+will join him to make a team, he cannot choose an arbitrary pair of students.
+The number of dogs owned by the trainer plus the sum of  number of dogs
+owned by both his prospective teammates has to be exactly S.
+The number of owned dogs varies from person to person,
+among the trainers and among the students as well.
+Thus, for a trainer, there is only a limited number of pairs among 
+the studens whom he can ask to join him in a team.
+This limitation leads to the definition of capacity.
+The capacity of a trainer is the number of different pairs of students
+who can form a team with the trainer.
+  The task
+Sort the trainers in increasing order of their capacities.
+When the capacities of some trainers are equal, those trainers are sorted in
+ascending order of the number of dogs they own.
+You may assume that each person owns less than 100 dogs.
+
+
+Abstract formulation
+
+A pair in a list L is a 2-tuple in L ( see k-tuple definition in task 3 )
+Let A and B be two lists of integers.
+For each item I in A, the capacity of I is equal to the number such of pairs {a, b} in B
+for which it holds  Sum(a, b) + I = S.
+
+The task
+Sort items in A in ascending order of their capacities.
+When the capacities of some items are equal, those items are sorted in
+ascending order of their values.
+Print the sorted items on one line, in the same format as input.
+The value of S happens to be the sum of the first three items in B.
+All items in A and B are positive and less than 100.
+The lengths of A and B do not exceed 20000.
+
+
+Example
+  Input
+5
+8
+2 4 6 8 10 12
+5 6 7 1 2 3 4 5 6 7 8 9 10 11 12
+11 12 32 31 22 21
+10 10 10 5 10 15 20 25
+11 12 32 31 22 21
+10 10 10 4 5 9 10 14 20 24
+5 10 15
+15 10 5 20 20 20 5 5 5
+
+  Output
+12 10 2 8 4 6
+11 12 21 22 31 32
+22 31 32 12 21 11
+10 15 5
+'''
+
+
+def task05( A, B ):
+    # your solution here
+    pass
+
+
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+#               I N P U T    R E A D I N G
+taskNo = int(input())
+Nlists = int(input())
+inputLists = []
+for k in range(Nlists):
+    oneList = list(map(int, input().split()))
+    inputLists.append(oneList)
+
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+#             P R O C E S S I N G
+
+t1 = time.time()
+if taskNo in [1, 2, 3, 4]:
+    for aList in inputLists:
+        if taskNo == 1:  task01(aList)
+        if taskNo == 2:  task02(aList)
+        if taskNo == 3:  task03(aList)
+        if taskNo == 4:  task04(aList)
+if taskNo in [5]:
+    for i in range(0, len(inputLists), 2):       # pairs of lists
+        task05(inputLists[i], inputLists[i + 1])
+
+t2 = time.time()
+# print( 'time', str(t2-t1)[:5] )
+
+</pre>
+
+
+
+<hr>
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking.
+The public data set is stored also in the upload system and each time a student submits a solution
+it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="getdata.php?task=practices05&item=datapub.zip"><b>Link to the public data set</b></a>
+</p>
+
+</div>
+</body>
+</html>

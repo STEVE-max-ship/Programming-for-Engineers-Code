@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="default.css" />
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+<div class="main">
+
+ <h3><font color="brown">PGE Exam Problem</font></h3>
+
+<h2><font color="blue">Z-bent Paths in an Array</font></h2>
+
+
+
+
+
+<p align="justify">
+
+Let us consider a rectangular array with <i>R</i> rows and <i>C</i> columns, containing numerical values. <br>
+
+A <b>path</b> is a sequence of cells in the array,
+in which each next cell (with the exception of the first cell)
+is adjacent to the previous cell in the path. <br>
+In this problem, we consider adjacency in only four principal directions: left, righ, up, down.
+Two cells which share only one corner (they are positioned diagonally with respect to each other) are not adjacent.
+<br>
+<br>
+
+
+A <b>z-bent path</b> is a path with a distinct shape, position, contents of the path itself and its immediate surroundings. It is described below.
+(While reading the description, step by step, you may compare it with example Image 1.)   <br>
+A z-bent path consists of three straight parts. The width of each part is exacly one cell. <br>
+The first part and the third part are horizontal, the middle part (the second part) is vertical.<br>
+The last cell in the first part is equal to the first cell in the second part
+and the last cell in the second part is equal to the first cell in the third part.
+<br>
+The first part starts at the left border of the array.
+The third part ends at the right border of the array.
+<br>
+No cell in any part touches the top border or the bottom border of the array.
+No cell in the central (second) part touches any border of the array.
+<br>
+The number of cells in the central part of the z-bent path is 4.
+<br>
+The first part is closer to the top border of the array then the third part. 
+<br>
+All cells which are part of a z-bent path contain zeroes.
+<br>
+Each cell which is not on the z-bent path and which is adjacent to
+some cell in the z-bent path contains a positive value.
+<br>
+Any path or any sequence of cells which does not satisfy all conditions given above is not a z-bent path.
+<br><br>
+
+
+
+The <b>coordinates</b> of a z-bent path consist of two numbers. The first number is the
+index of the row in which the z-bent path starts, and the second number is the
+index of the column in which the central part is located.
+</p>
+
+
+<table border="0" width="800" align="center">
+   <tr>
+
+   <td align="center">
+
+   <img style=width="220px" height="240px" src="getdata.php?task=z2zbentpaths&item=img1.png" />
+   <!--
+   <img style=width="220px" height="240px" src="img1.png" />
+   -->
+<br><br>
+<b>Image 1.</b>  Example of an array with two z-bent paths. Their coordinates are
+1 2 and 7 7. The cells of the z-bent paths are depicted with white background.
+The cells which are adjacent to the cells of z-bent paths are depicted with
+dark background and white font. Note that all those cells contain non-zero values.
+The Image illustrates Example 1 below.
+
+
+</td>
+</tr>
+</table>
+
+
+<!-- T H E   T A S K  -------------------------------------------------------------------------------------------------------------------- -->
+
+<h3><font color="blue">The task</font></h3>
+
+Print the coordinates of all z-bent paths in the given array.
+
+ <hr>
+
+
+<!-- I N P U T  -------------------------------------------------------------------------------------------------------------------- -->
+
+<h3><font color="blue">Input</font></h3>
+<p align="justify">
+The first input line contains two positive integers <i>R</i>, <i>C</i> separated by space.
+They represent, in this order, the number of rows in the array and the number
+of columns in the array.  <br>
+Next, there are <i>R</i> lines of input, each contains <i>C</i> values separated by spaces.
+Each line contains values of the corresponding array row.
+
+The size of the array is at most 1000 &times; 1000.
+The values in the array are non-negative integers less then 10.
+</p>
+
+<h3><font color="blue">Output</font></h3>
+<p align="justify">
+The output contains the coordinates of all z-bent paths in the given array, in the ascending order of the rows.
+Each output line contains the coordinates of one z-bent path, separated by space.
+<br>
+It is guaranteed that there is always at least one z-bent path in the input array.
+</p>
+
+
+
+
+
+<center>
+<table width="95%">
+	<col width="25%"/>
+	<col width="25%"/>
+	<col width="30%"/>
+	<col width="5%"/>
+	<col width="10%"/>
+    <tr>
+
+<td valign="top">
+	<h3><font color="blue">Example 1</font></h3>
+<b>Input</b><br>
+<pre>
+13 12
+1 7 3 3 0 0 6 7 7 8 2 5
+0 0 0 3 1 2 6 0 0 0 0 0
+4 7 0 2 6 2 5 8 8 2 1 4
+3 1 0 9 9 1 8 9 4 2 2 2
+4 3 0 0 0 0 0 0 0 0 0 0
+0 0 4 4 6 8 2 9 2 1 5 8
+4 4 6 8 2 6 7 8 2 3 2 6
+0 0 0 0 0 0 0 0 3 0 0 0
+1 1 1 4 1 1 3 0 5 1 1 1
+0 0 0 0 0 6 3 0 6 1 2 4
+4 4 1 6 0 5 3 0 0 0 0 0
+8 1 2 7 0 3 6 2 2 2 2 2
+0 5 6 5 0 6 7 8 4 9 9 1
+</pre>
+
+<b>Output</b><br>
+<pre>
+1 2
+7 7
+</pre>
+
+</td>
+
+<td valign="top">
+	<h3><font color="blue">Example 2</font></h3>
+<b>Input</b><br>
+<pre>
+12 9
+4 4 4 4 4 4 4 4 4
+0 0 0 0 0 0 0 0 4
+4 4 4 4 4 4 4 0 0
+0 0 0 0 0 0 4 0 4
+4 4 4 4 4 0 4 0 0
+0 0 0 0 4 0 4 4 4
+4 4 4 0 4 0 0 0 0
+0 0 4 0 4 4 4 4 4
+4 0 4 0 0 0 0 0 0
+4 0 4 4 4 4 4 4 4
+4 0 0 1 0 0 0 0 0
+4 4 4 4 4 4 4 4 4
+</pre>
+
+<b>Output</b><br>
+<pre>
+3 5
+5 3
+</pre>
+
+
+</td>
+
+<td valign="top">		
+	<h3><font color="blue">Example 3</font></h3>
+<b>Input</b><br>
+<pre>
+9 15
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 2 3 1 2 3 1 2 3 1 2 3 1 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 3 0
+1 2 3 1 2 3 1 2 3 1 2 3 0 1 0
+0 0 0 0 0 0 0 0 0 0 0 1 0 2 3
+0 0 0 0 0 0 0 0 0 0 0 2 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 3 1 2
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+</pre>
+
+<b>Output</b><br>
+<pre>
+3 12
+</pre>
+</td>
+
+    </tr>
+</table>
+</center>
+
+<!---
+The path is bent by 90 degrees in the two cells which are
+common to two consecutive paths of the path.
+
+--->
+
+
+<hr>
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking.
+The public data set is stored also in the upload system and each time a student submits a solution
+it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="getdata.php?task=z2zbentpaths&item=datapub.zip"><b>Link to the public data set</b></a>
+</p>
+
+</div>
+
+
+</body>
+</html>

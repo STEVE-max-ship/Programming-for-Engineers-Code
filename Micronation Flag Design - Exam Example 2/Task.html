@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="default.css" />
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+<div class="main">
+
+ <h3><font color="brown">PGE Exam Preparation 03</font></h3>
+
+<b> The problem serves as an example, it can be regularly evaluated in brute, <br>
+however, it is not graded and NO POINTS (neither positive nor negative) in PGE  are assigned to it.</b>
+<br><br>
+
+
+<h2><font color="blue">Micronation Flag Design</font></h2>
+
+
+<a href="getdata.php?task=exprep03&item=desc.pdf">pdf version</a> (Download and rename with .pdf extension.)
+
+<p align="justify">
+
+Quido is designing a flag for his newly established micronation located somewhere in Dejvice, Prague.
+<br><br>
+The flag is rectangular and it is covered by stripes.
+It is divided by into the left part, denoted LP,
+and the right part, denoted RP. Both LP and RP are rectangular.
+Each part is divided into stripes. LP is divided into vertical stripes
+RP is divided into horizontal stripes.
+The width of all stripes in LP is the same and the
+width of all stripes in RP is the same. However,
+the widths of stripes in LP and RP may differ.
+<br><br>
+Each stripe is completely filled with a color.
+There are two colors, C1 and C2.
+The colors of stripes in both parts are alternating.
+In LP, the leftmost stripe is filled with C1,
+the next stripe is filled with C2, the next stripe is filled again with C1 etc.
+In RP, the topmost stripe is filled with C1,
+the next stripe immediately below it is filled with C2, the next stripe is filled again with C1 etc.
+
+
+<!-- T H E   T A S K  -------------------------------------------------------------------------------------------------------------------- -->
+
+
+<h3><font color="blue">The task</font></h3>
+Produce the image of the flag, given its numerical description.
+The flag is represented as a 2D array, in which stripe colors C1 and C2 are
+represented as different integer values.
+All measures are given in pixels, each pixel is represented by one array cell.
+
+
+
+
+<h3><font color="blue">Implementation Note</font></h3>
+You may prepare a complete "image" of the flag internally in an array and only print it out completely at the end of your code.
+Or, you may also print the flag line by line, without any more complex internal representation.
+
+ <hr>
+
+<!-- I N P U T  -------------------------------------------------------------------------------------------------------------------- -->
+
+<h3><font color="blue">Input</font></h3>
+<p align="justify">
+The input consists of one text line containing seven positive integers
+separated by spaces, FH, FW, LPW, LSW, RSW, C1, C2.
+FH and FW are Flag Height and Flag Width, respectively.
+LPW is Left part width.
+LSW and RSW are Left Stripe Width and Right Stripe Width, respectively.
+C1 and C2 are the colors stripes, C1 is the color of the leftmost stripe in LP and topmost stripe in RP.
+It is guaranteed that the width of LP is a positive multiple of LSW,
+and also the height of the flag (height of RP) is a positive multiple of RSW.
+Values of C1 and C2 are ranging from 0 to 9.
+<br>
+The size of the flag does not exceed 800 &times; 800 pixels.
+
+</p>
+
+<h3><font color="blue">Output</font></h3>
+<p align="justify">
+Print the flag according to the input specification.
+Each pixel of the flag is filled with either C1 or C2 color. Each pixel is represented as one
+cell of a 2D array which contain only C1 and C2 values.
+Each pixel row is represented as one text line in the output, there are no spaces
+between adjacent cells, neither horizontally, nor vertically.
+</p>
+
+
+
+
+<center>
+<table width="95%">
+	<col width="22%"/>
+	<col width="30%"/>
+	<col width="30%"/>
+	<col width="5%"/>
+	<col width="10%"/>
+    <tr>
+
+<td valign="top">
+	<h3><font color="blue">Example 1</font></h3>
+<b>Input</b><br>
+<pre>
+10 20 12 4 2 3 7
+</pre>
+
+<b>Output</b><br>
+<pre>
+33337777333333333333
+33337777333333333333
+33337777333377777777
+33337777333377777777
+33337777333333333333
+33337777333333333333
+33337777333377777777
+33337777333377777777
+33337777333333333333
+33337777333333333333
+</pre>
+
+
+</td>
+
+<td valign="top">		
+	<h3><font color="blue">Example 2</font></h3>
+<b>Input</b><br>
+<pre>
+16 30 20 5 2 5 4
+</pre>
+
+<b>Output</b><br>
+<pre>
+555554444455555444445555555555
+555554444455555444445555555555
+555554444455555444444444444444
+555554444455555444444444444444
+555554444455555444445555555555
+555554444455555444445555555555
+555554444455555444444444444444
+555554444455555444444444444444
+555554444455555444445555555555
+555554444455555444445555555555
+555554444455555444444444444444
+555554444455555444444444444444
+555554444455555444445555555555
+555554444455555444445555555555
+555554444455555444444444444444
+555554444455555444444444444444
+</pre>
+
+
+</td>
+
+<td valign="top">		
+	<h3><font color="blue">Example 3</font></h3>
+<b>Input</b><br>
+<pre>
+20 50 30 3 1 1 0
+</pre>
+
+<b>Output</b><br>
+<pre>
+11100011100011100011100011100011111111111111111111
+11100011100011100011100011100000000000000000000000
+11100011100011100011100011100011111111111111111111
+11100011100011100011100011100000000000000000000000
+11100011100011100011100011100011111111111111111111
+11100011100011100011100011100000000000000000000000
+11100011100011100011100011100011111111111111111111
+11100011100011100011100011100000000000000000000000
+11100011100011100011100011100011111111111111111111
+11100011100011100011100011100000000000000000000000
+11100011100011100011100011100011111111111111111111
+11100011100011100011100011100000000000000000000000
+11100011100011100011100011100011111111111111111111
+11100011100011100011100011100000000000000000000000
+11100011100011100011100011100011111111111111111111
+11100011100011100011100011100000000000000000000000
+11100011100011100011100011100011111111111111111111
+11100011100011100011100011100000000000000000000000
+11100011100011100011100011100011111111111111111111
+11100011100011100011100011100000000000000000000000
+</pre>
+</td>
+
+    </tr>
+</table>
+</center>
+
+
+
+
+
+
+
+
+
+
+<hr>
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking.
+The public data set is stored also in the upload system and each time a student submits a solution
+it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="getdata.php?task=exprep03&item=datapub.zip"><b>Link to the public data set</b></a>
+</p>
+
+</div>
+
+</body>
+</html>

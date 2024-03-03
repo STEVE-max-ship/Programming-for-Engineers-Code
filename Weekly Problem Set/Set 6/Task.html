@@ -1,0 +1,939 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="default.css" />
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+<div class="main">
+
+<h2><font color="blue">PGE Practices 06b  (a variant of Practices 06)</font></h2>
+
+<a href="getdata.php?task=practices06b&item=desc.pdf">pdf version</a> (Download and rename with .pdf extension.)
+
+<p align="justify">
+
+<pre>
+
+import time
+# practices 06b
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # ----------------------------------------------------------------------- # #
+# #                           N O T I C E                                   # #
+# # ----------------------------------------------------------------------- # #
+# #                                                                         # #
+# #   This set of practices is a parallel variant to the practices 06 set.  # #
+# #                                                                         # #
+# #   The only difference between the sets is that in this variant          # #
+# #   the number of recursive calls is not considered at all,               # #
+# #   and it is not printed in the output.                                  # #
+# #   Apart from the recursive calls output, the input and output data      # #
+# #   of both versions are identical.                                       # #
+# #   Grading of both variants is also identical.                           # #
+# #                                                                         # #
+# #   Thus, you are free to develop an individually crafted code            # #
+# #   which does not follow the guidelines given at each task.              # #
+# #                                                                         # #
+# #   You may solve some of the tasks in the original variant               # #
+# #   and others in this variant. The points in brute will be totaled       # #
+# #   as if you have solved all tasks in only variant.                      # #
+# #                                                                         # # 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+# Common input format
+# -------------------
+# (Read the tasks descriptions below before reading this paragraph.)
+# All tasks in practices 06b set share common data input format:
+# The first line contains the number of the task (1 - 5).
+# The second line contains the number N of lists in the input.
+# Next, there are N lines of input, each contains one input list.
+# Meaning of the values in the input list is specified in detail in each task.
+# Each list consists only of integers. List entries are separated by single space,
+# there are no other symbols on the input line.
+# The input always contain exactly one data set of one task.
+# In the evaluation system, the code is run repeatedly, each time with different input
+# from which the running program reads the data.
+
+# Solution code structure
+# -----------------------
+# The code reads the input data, including the number of the task.
+# Next, it runs a function or a block of code which accepts the input data
+# and computes and prints the solution to it.
+# It is recommended to wrap the solution of each task in a separate function,
+# an example (not obligatory!) structure of the code
+# is illustrated by the contents of this file.
+
+# ================================================================================
+
+# ------------------------------------------------------------------------------
+# Task 01
+
+def task01( N, K ):
+    # your solution here
+    pass
+'''
+------------------------------------------------------------------
+Task description
+------------------------------------------------------------------
+A string is made of two characters, 'o' and 'I'.
+Let us call them tiny character and huge character.
+Two non-negative integers N and K are given, K <= N.
+The task is to generate a list S of all strings
+which length is N and which contain exactly K huge characters.
+
+------------------------------------------------------------------
+Input and Output
+------------------------------------------------------------------
+Input
+The first input line contains single integer 1, it is the number of the task.
+The second line contains single integer C, the number of cases.
+Next, there are C lines, each represents one case.
+Each line contains values N and K, separated by space.
+It holds, 1 <= N <= K <= 20.
+
+Output
+For each input case, the output contains one line with the length of list S.
+
+------------------------------------------------------------------
+Examples
+------------------------------------------------------------------
+  Input
+1
+1
+3 1
+  Output
+3
+  # S = Ioo oIo ooI
+  ( The contents of S is not part of the output, it is listed here for
+  ( reference only. Brackets, commas, and quotes in S specification are omitted.)
+# ----------------------------------------------------------------
+  Input
+1
+1
+4 1
+  Output
+4
+  # S = Iooo oIoo ooIo oooI
+# ----------------------------------------------------------------
+  Input
+1
+1
+4 2
+  Output
+6
+  # S = IIoo IoIo IooI oIIo oIoI ooII
+# ----------------------------------------------------------------
+  Input
+1
+1
+5 3
+  Output
+10
+  # S = IIIoo IIoIo IIooI IoIIo IoIoI IooII oIIIo oIIoI oIoII ooIII
+# ----------------------------------------------------------------
+  Input
+1
+3
+7 0
+7 1
+7 4
+  Output
+1
+7
+35
+  # The corresponding lists are
+  # S = ooooooo
+  # S = Ioooooo oIooooo ooIoooo oooIooo ooooIoo oooooIo ooooooI
+  # S = IIIIooo IIIoIoo IIIooIo IIIoooI IIoIIoo IIoIoIo IIoIooI IIooIIo IIooIoI IIoooII
+        IoIIIoo IoIIoIo IoIIooI IoIoIIo IoIoIoI IoIooII IooIIIo IooIIoI IooIoII IoooIII
+        oIIIIoo oIIIoIo oIIIooI oIIoIIo oIIoIoI oIIooII oIoIIIo oIoIIoI oIoIoII oIooIII
+        ooIIIIo ooIIIoI ooIIoII ooIoIII oooIIII
+
+------------------------------------------------------------------
+Solution strategy
+------------------------------------------------------------------
+The solution is based on the recursive idea which works generally,
+we demonstrate it here on some particular values for better
+intuitive illustration:
+
+Let us suppose, N = 5, K = 3.
+To generate the list of all strings of length 5, with 3 huge characters,
+Let us suppose we already have at our hands two lists L1 and L2:
+L1 contains all strings of length 4 with 2 huge characters.
+L2 contains all strings of length 4 with 3 huge characters.
+
+  L1 = IIoo IoIo IooI oIIo oIoI ooII
+  L2 = IIIo IIoI IoII oIII
+
+Now, we prepend  one huge character to each string in L1.
+In this way we obtain all strings of length 5, with 3 huge characters,
+which begin with huge character
+
+Next, we prepend  one tiny character to each string in L2.
+In this way we obtain all strings of length 5, with 3 huge characters,
+which begin with tiny character.
+
+  L1 = IIIoo IIoIo IIooI IoIIo IoIoI IooII
+  L2 = oIIIo oIIoI oIoII ooIII
+
+Finally, we just merge L1 and L2 into a single list, because
+now we have all demanded strings of length 5.
+
+To obtain a general solution, we just substitute N for 5, N-1 for 4,
+K for 3, and K-1 for 2 in the description above.
+
+-----
+Another solution strategy example:
+Let us suppose N = 4, K = 2.
+
+First, let recursive calls generate two lists:
+L1 contains all strings of length 3 with 1 huge character.
+L2 contains all strings of length 3 with 2 huge characters.
+
+L1 = Ioo oIo ooI
+L2 = IIo IoI oII
+
+Next,  after prepending huge character to strings in L1 and
+tiny character to each string in L2 we obtain:
+
+L1 = IIoo IoIo IooI
+L2 = oIIo oIoI ooII
+
+Finally, L1 + L2 is the solution for N=4, K=2.
+------------------------------------------------------------------
+Solution implementation
+------------------------------------------------------------------
+Recursive function F
+
+Parameters of F are N and K.
+
+  First, F checks if it is time to stop and return from recursion.
+  If K is equal to 0, F immediately returns string consisting of N tiny characters.
+  If K is equal to N, F immediately returns string consisting of N huge characters.
+
+  When neither of the previous cases happens, F performs two recursive calls
+  and returns the combined result of both calls.
+  The first call returns list L1 of all strings,
+   which Length is N-1 and which contain K-1 huge characters.
+  The second call returns list L2 of all strings,
+  which Length is N-1 and which contain K huge characters.
+  Now, the function prepends each string in L1 with huge character
+  and each string in L2 with tiny character.
+  Finally, it returns the concatenation of L1 and  L2.
+  
+  
+Clearly, when constructing the solution for the original input values N and K,
+the recursive function F has to be called two times -- with parameter C set to
+tiny character in one call and parameter C set to huge character in the other call.
+The resulting two lists returned from both calls have to be marged into single one
+to obtain correctly the all strings which represent the solution of the problem.
+
+------------------------------------------------------------------
+'''
+
+# ------------------------------------------------------------------------------
+# Task02
+
+def task02( N, K ):
+    # your solution here
+    pass
+
+
+'''
+------------------------------------------------------------------
+Task description
+------------------------------------------------------------------
+A string is made of two characters, 'o' and 'I'.
+Let us call them tiny character and huge character.
+Two non-negative integers N and K are given, K <= N.
+The task is to generate a list of all strings
+which length is N and which contain exactly K huge characters.
+The additional condition says that there should not occur
+two immediately adjacent huge characters anywhere in all generated strings.
+
+------------------------------------------------------------------
+Input and Output
+------------------------------------------------------------------
+Input
+The first input line contains single integer 2, it is the number of the task.
+The second line contains single integer C, the number of cases.
+Next, there are C lines, each represents one case.
+Each line contains values N and K, separated by space.
+It holds, 1 <= N <= K <= 20.
+
+Output
+For each input case, the output contains one line with the length of list S.
+
+------------------------------------------------------------------
+Examples
+------------------------------------------------------------------
+  Input
+2
+1
+3 1
+  Output
+3
+  # S = Ioo oIo ooI
+  ( The contents of S is not part of the output, it is listed here for
+  ( reference only. Brackets, commas, and quotes in S specification are omitted.)
+# ----------------------------------------------------------------
+  Input
+4 1
+  Output
+4
+  # S = Iooo oIoo ooIo oooI
+# ----------------------------------------------------------------
+  Input
+4 2
+  Output
+3
+  # S = IoIo IooI oIoI
+# ----------------------------------------------------------------
+  Input
+5 3
+  Output
+1
+  # S = IoIoI
+# ----------------------------------------------------------------
+  Input
+2
+4
+4 3
+3 2
+8 4
+10 4
+  Output
+0
+1
+5
+35
+  # The corresponding lists are
+  # S is empty
+  # S = IoI
+  # S = 'IooIoIoI IoIooIoI IoIoIooI IoIoIoIo oIoIoIoI
+  # S = IooooIoIoI IoooIooIoI IoooIoIooI IoooIoIoIo IooIoooIoI IooIooIooI IooIooIoIo
+        IooIoIoooI IooIoIooIo IooIoIoIoo IoIooooIoI IoIoooIooI IoIoooIoIo IoIooIoooI
+        IoIooIooIo IoIooIoIoo IoIoIooooI IoIoIoooIo IoIoIooIoo IoIoIoIooo oooIoIoIoI
+        ooIooIoIoI ooIoIooIoI ooIoIoIooI ooIoIoIoIo oIoooIoIoI oIooIooIoI oIooIoIooI
+        oIooIoIoIo oIoIoooIoI oIoIooIooI oIoIooIoIo oIoIoIoooI oIoIoIooIo oIoIoIoIoo
+
+------------------------------------------------------------------
+Solution strategy
+------------------------------------------------------------------
+The solution is based on the recusive idea:
+
+The parameters of recursive function F will be the values of N and K,
+and also the character C which will appear as the first character
+of all strings generated by F.
+
+If the parameter N is bigger than 1, F will call itself recursively
+to obtain the list of all demanded strings of length N-1.
+Then, it will prepend all those strings by the C character
+and return the updated list.
+
+However, the detailed behaviour of F will depend on the C parameter.
+
+If C is huge character, and it will appear as the first character of all
+returned strings, then the second character in all those strings must be
+tiny character and thus, the recursive call inside F must
+specify that all strings generated by the recursive call should start
+with tiny character.
+On the other hand, if C is tiny character, it can be prepended to any string.
+In this case, F will call itself recursively twice, each time
+with different demanded first character in the strings returned by the recursive call.
+Also, the parameter K has to be specified in all recursive calls
+accordingly, as the example below demonstrates.
+
+For example, let N, K, C = 5, 2, hugeCharacter.
+Then, F will call recursively itself with
+     parameters (N-1, K-1, tinyCharacter) = (4, 1, tinyCharacter)
+     and that call will return strings oIoo, ooIo, oooI.
+    F will prepend each of those strings by I and return
+    (list of) strings IoIoo, IooIo, IoooI.
+
+To continue the example, let N, K, C = 5, 2, tinyCharacter.
+Then, F will call recursively itself with
+     parameters (N-1, K, hugeCharacter) = (4, 2, hugeCharacter)
+     and that call will return strings IoIo, IooI.
+    F will prepend each of those strings by o and return
+    (list of) strings oIooI, oIoIo.
+    Then, F will perform another recursive call with
+    parameters (N-1, K, tinyCharacter) =  (4, 2, tinyCharacter)
+    and that call will return string oIoI.
+
+    Finally, F will merge all strings into a single list
+    containing oIoI, IooI, IoIo, and prepend each string with o,
+    and return  (list of) strings ooIoI, oIooI, oIoIo.
+
+Note that the two described calculations, with parameters 
+(N, K, C) = (5, 2, hugeCharacter) and (N, K, C) = (5, 2, tinyCharacter)
+together form a solution of the task of generating all strings
+of length 5 with 2 huge characters in them.
+
+------------------------------------------------------------------
+Solution implementation
+------------------------------------------------------------------
+Recursive function F
+
+Parameters of F are N, K, and C which is the first character of all returned strings.
+
+  First, F verifies if it is time to stop and return from recursion.
+  That happens only when N equals to 1. In that case, two specific checks are done:
+  1. If K is 1 and C is huge character then a list with a single string is returned,
+     the string contains only one character - C.
+  2. If K is 0 and C is tiny character then a list with a single string is returned,
+     the string contains only one character - C.
+  If none of the conditions 1 or 2 holds, F returns empty list.
+
+  The following part of F is performed when N > 1.
+  
+  If C is huge character, F is called recursively with both parameters N and K
+  decreased by 1 and C equal to tiny character.
+  In the list obtained by the recursive call, each string is prepended with
+  huge character and this modified list is returned as a result of F.
+
+  If C is tiny character, two recursive calls are done.
+  In both calls, N is decreased by 1, K is unchanged. One of the calls takes as its third
+  parameter tiny character and the other call takes as its third parameter huge character.
+  The lists returned from both calls are concatenated into a single list.
+  Each string in the concatenated list is prepended by tiny character.
+  Finally, the modified list is returned as the result of F.
+
+------------------------------------------------------------------
+'''
+
+# ------------------------------------------------------------------------------
+# Task 03
+
+def task03( List ):
+    # your solution here
+    pass
+
+'''
+------------------------------------------------------------------
+Task description
+------------------------------------------------------------------
+We are given a list L of integers, some of them positive, some of them negative,
+there may be also some zeros in the list.
+Each non-zero item appears in the list only once.
+
+The task is to generate a list T of all such tuples made of non-zero items in L,
+which sum is exactly zero. (The sum of a tuple is the sum of all items in it.)
+The number of items in the tuples may vary.
+
+------------------------------------------------------------------
+Input and Output
+------------------------------------------------------------------
+Input
+The first input line contains single integer 3, it is the number of the task.
+The second line contains single integer C, the number of cases.
+Next, there are C lines, each represents one case.
+Each line contains a list of integers. The list is not empty.
+The length of the list is at most 21.
+
+Output
+For each input case, the output contains one line with the number 
+of the tuples in T.
+
+------------------------------------------------------------------
+Examples
+------------------------------------------------------------------
+  Input
+3
+1
+0 1 -1 2 -2 3
+  Output
+4
+  # T = [[2, -2], [-1, -2, 3], [1, -1], [1, -1, 2, -2]]
+  ( The contents of T is not part of the output, it is listed here for
+  ( reference only. Also, the order of items in T is not essential. )
+# ----------------------------------------------------------------
+  Input
+3
+1
+0 -2 -3 1 0 -1 4
+  Output
+3
+  # T = [[1, -1], [-3, -1, 4], [-2, -3, 1, 4]]
+# ----------------------------------------------------------------
+  Input
+3
+1
+-1 -2 -3 -4 5 6 7
+  Output
+6
+  # T = [[-3, -4, 7], [-2, -4, 6], [-2, -3, 5],
+         [-1, -4, 5], [-1, -2, -4, 7], [-1, -2, -3, 6]]
+# ----------------------------------------------------------------
+  Input
+3
+4
+-5 0 0 1 2 3 4 5
+-1 1 -2 2
+-10 2 4 7 9
+-10 -5 2 4 7 9
+  Output
+3
+3
+0
+1
+  # The corresponding lists of tuples are
+  # T = [[-5, 5], [-5, 2, 3], [-5, 1, 4]]
+  # T = [[-2, 2], [-1, 1], [-1, 1, -2, 2]]
+  # T = []
+  # T = [[-10, -5, 2, 4, 9]]
+
+------------------------------------------------------------------
+Solution strategy
+------------------------------------------------------------------
+The solution is based on the recursive idea:
+
+The input to the solution process is the list L and
+also the prescribed sum PS of all elements in each tuple in the resulting list T
+which is going to be generated by recursive process.
+
+Although the prescribed sum is equal to zero in the problem specification,
+the prescribed sum in subsequent recursive calls is often different from zero.
+We will see soon why.
+
+Recursive solution divides list L with n items conceptually into two parts:
+The first value V1, and the rest of it, LRest = [V2, V3, ..., Vn].
+    V1:    LRest:
+   +--+   +--+--+--+--+--+--+--+
+   |V1|   |V2|V3|   ....    |Vn|
+   +--+   +--+--+--+--+--+--+--+
+Now, considering the definite solution, we may expect two cases:
+  1. V1 will not be present in some tuples, and
+  2. V1 will be present in the remaining tuples.
+The recursive idea builds separately two lists, one for case 1 and one for case 2,
+ad merges them into a single list T which is the solution.
+
+In case 1, all tuples in LRest which sum is PS are generated by the recursive call.
+Those tuples will not contain V1.
+In case 2, all tuples in LRest which sum is PS-V1 are generated by the recursive call,
+and then item V1 is included in all those tuples. After the inclusion, the sum of each tuple
+in case 2 becomes equal to PS.
+
+There are two additional situations which have to be managed  properly:
+First, if V1 = 0 then case 2 should not be considered,
+and then the definite solution, the list T, is equal to the list created in the first case  only.
+Second, when the value of V1 itself is equal to the demanded sum DS,
+then also a tuple containing single item V1 should be adedd (as a separate tuple!)
+to the list of tuples generated in case 2.
+
+------------------------------------------------------------------
+Solution implementation
+------------------------------------------------------------------
+A proposed simple recursive function F:
+
+Input:
+   L            : List of values
+   demandedSum  : The prescribed sum of each tuple returned by the function
+
+Output:
+   T :  List of all tuples in L which do not contain 0
+        and which sum is equal to the demandedSum parameter.
+
+Function F description:
+
+  If L is empty, F returns empty list.
+
+  List T1 is created by calling recursively F with parameters
+  representing L without the first item, and the demandedSum unchanged.
+  If the first item in L is 0, then F returns T1 as its result.
+
+  Next, list T2 is created by calling recursively F with parameters
+  representing L without the first item, and the demandedSum decreased by the
+  value of the first item in L. If T2 is not empty, the first item of L
+  is added to all tuples in T. Additionally, if the value of the first item of L
+  is equal to the demandedSum parameter, a tuple containing only this first
+  item in L is added to T2.
+  Finally, lists T1 and T2 are merged in to single list T which is returned as the solution.
+
+------------------------------------------------------------------
+'''
+
+# ------------------------------------------------------------------------------
+# Task 04
+
+def task04( no_of_0ranges_and_packet_prices ):
+    # your solution here
+    pass
+
+
+'''
+------------------------------------------------------------------
+Task description
+------------------------------------------------------------------
+We have a pile of oranges to sell. The oranges, it turns out, can be sold
+only in packages. Each package can contain from one to few oranges.
+The cost of the package depends on its size, that is the the number of oranges in it.
+We are given a list of package prices for each possible number of oranges in a package.
+the first item in the list is the price for a packet with one orange,
+the second item is the price for a packet with two oranges, and so on, the price
+for a packet with K oranges is the K-th item in the list.
+The price for 0 oranges in package is always 0.
+
+Our task is to divide our pile into a set of orange packages which
+sizes are chosen in such way that their total cost is maximum.
+All oranges have to be packed. There may be more packages of the same size in our set.
+
+------------------------------------------------------------------
+Input and Output
+------------------------------------------------------------------
+Input
+The first input line contains single integer 4, it is the number of the task.
+The second line contains single integer C, the number of cases.
+Next, there are C lines, each represents one case.
+The first value on a line is the number of oranges in the pile, followed by the list of prices.
+The list is sorted by the number of oranges in a packet, that is, the first item in the list
+is the price for a packet with one orange, the second item is the price for a packet
+with two oranges, and so on.
+The size of a packet is at most 10, there are no more than 20 oranges.
+The list of packet prices is not empty.
+
+Output
+For each input case, the output consist of a single line with 
+the best price that can be obtained by packaging all oranges.
+
+------------------------------------------------------------------
+Examples
+------------------------------------------------------------------
+
+Examples
+  Input
+4
+1
+7 1 3 4 5 6
+  Output
+10
+  # 7 oranges
+  # Price: 10 = 4 + 3 + 3
+  # Packets of 3, 2, and 2 oranges
+# ----------------------------------------------------------------
+  Input
+4
+1
+11 10 21 30 42 52
+  Output
+115
+  # 11 oranges
+  # Price: 115 = 52 + 42 + 21
+  # Packets of 5, 4, and 2 oranges
+# ----------------------------------------------------------------
+  Input
+4
+1
+16 9 21 31 41 53
+  Output
+169
+  # 16 oranges
+  # Price: 169 =  53 + 53 + 21 + 21 + 21
+  # Packets of 5, 5, 2, 2, 2  oranges
+# ----------------------------------------------------------------
+  Input
+4
+4
+4 2 2 2 6
+5 10 1 100 4 4 4
+10 10 1 100 4 4 4
+15 1 4 4 4 10 100
+  Output
+8
+120
+310
+205
+  # The corresponding packaging:
+  # Four packets, each of 1 orange
+  # Packets of 3, 1, and 1 oranges
+  # Packets of 3, 3, 3, and 1 oranges
+  # Packets of 6, 6, 2, and 1 oranges
+
+------------------------------------------------------------------
+Solution strategy
+------------------------------------------------------------------
+The solution is based on the recursive idea:
+
+If the number of oranges is 0 (or smaller) the returned cost is also 0.
+
+The solution investigates separately as many options as there are
+possible packet sizes, one after another.
+It conceptually divides the pile of oranges into two parts.
+The first part is a few oranges which can be packed into a single packet.
+The second part remains unpacked.
+Then, the function asks the recursion to calculate the best price for the
+second part, and adds to that value the price of the single packet made of the first part.
+This calculation is repeated more times, for each possible size of the first part.
+The results of all calculations are compared, the best one is chosen and returned
+as a solution. When there are more calculations which yield the same best price,
+any of them is chosen as the result.
+
+For example
+Prices = [0, 1, 3, 4, 5, 6],  4 oranges
+
+      first part: 1 orange, rest: 3 oranges
+      cost of packing the first part into a single package  = 1
+      cost of packing the rest, (returned by the recursion) = 4
+
+      first part: 2 oranges, rest: 2 oranges
+      cost of packing the first part into a single package  = 3
+      cost of packing the rest, (returned by the recursion) = 3
+
+      first part: 3 oranges, rest: 1 orange
+      cost of packing the first part into a single package  = 4
+      cost of packing the rest, (returned by the recursion) = 1
+
+      Of all three calculations, the second one gives the best
+      total price 3+3 = 6, and this price is returned as the result.
+
+      (Zero at the beginning of the list of prices is just a formal value,
+      due to Python list indexing style, it is not used in calculations.)
+
+------------------------------------------------------------------
+Solution implementation
+------------------------------------------------------------------
+A proposed simple recursive function F:
+
+Input:
+   L         : List of orange packet prices, the price of packet with
+               K oranges is at position K in L.
+               This parameter is not changed in any of the function calls.
+   Noranges  : The number of oranges to be packed.
+Output:
+      Result : Biggest total price of packages made of all oranges available.
+
+
+If the number of oranges is 0, F returns 0.
+
+Otherwise, bestPrice variable is set to 0 and updated in the subsequent loop.
+The loop starts with packet size 1 and then it loops through all possible packet sizes.
+In each loop, the following happens:
+  A recursive call is performed, with parameter Noranges decreased
+  by the current packet size.
+  The current packet price is added to the result of the recursive call.
+  If the total is bigger than the best price recorded so far (in bestPrice variable),
+  the bestrPrice variable is updated to the given total.
+The number of the loops cannot exceed the maximum available packet size,
+and also it cannot exceed the number of oranges available.
+
+Finally, the bestPrice varible value is returned from F as the solution.
+
+------------------------------------------------------------------------------
+'''
+
+# ------------------------------------------------------------------------------
+# Task 05
+
+'''
+------------------------------------------------------------------
+Task description
+------------------------------------------------------------------
+Quido is running a bus tour company.
+A tour starts in the town and ends at the top of the nearby mountain.
+There are some viewpoints on the road to the top.   
+Quido is deciding at which viewpoints will the bus stop
+for tourist sightseeing. He selects the viewpoints according to the rules:
+   1. The height (above sea level) of each next selected view point
+        has to be higher than the height of the previous selected viewpoint.
+   2. The number of selected viewpoints has to be maximum possible
+      and rule 1. has to be respected.
+
+A list of heights of all viewpoints on the road is given.
+
+For example:
+    heights  = [5, 4, 2, 7, 5, 9, 1, 2, 8, 3, 9]  # heights are given in hundreds of feet
+    selected = [5, 7, 8, 9]
+    # selected viewpoints indexes in the original list are 0, 3, 8, 10, respectively
+   (See more examples below)
+
+Clearly, there may be more ways to do the selection.
+Selection [4, 5, 8, 9] would also satisfy the conditions.
+Any solution respecting rules 1. and 2. is satisfactory.
+
+------------------------------------------------------------------
+Input and Output
+------------------------------------------------------------------
+Input
+The first input line contains single integer 5, it is the number of the task.
+The second line contains single integer C, the number of cases.
+Next, there are C lines, each represents one case.
+A line contains a list of non-negative integers representing heights of successive
+viewpoints on the road. The list is not empty. The length of the list is at most 30.
+
+Output
+For each input case, the output consist of a single line with the maximum 
+number of selected viewpoints compliant with Quido's demands.
+
+------------------------------------------------------------------
+Examples
+------------------------------------------------------------------
+  Input
+5
+1
+2 4 5 6 7
+  Output
+5
+  # T = [2, 4, 5, 6, 7]
+# ----------------------------------------------------------------
+  Input
+5
+1
+9 8 7 6 5 6 7 8 9 1
+  Output
+5
+  # T = [5, 6, 7, 8, 9]
+# ----------------------------------------------------------------
+  Input
+5
+3
+2 4 2 5 2 6 2 7
+5 4 2 7 5 9 1 2 8 3 9
+9 1 8 2 7 3 6 4 5 4 13 6 12 7 11 8 10 9 4
+  Output
+5
+4
+9
+  # The corresponding selected viewpoints heights:
+  # [2, 4, 5, 6, 7]
+  # [5, 7, 8, 9]
+  # [1, 2, 3, 4, 5, 6, 7, 8, 10]
+
+------------------------------------------------------------------
+Solution strategy
+------------------------------------------------------------------
+Let us call LSV (List of Selected Viewpoints) the list of selected
+viewpoints for the whole tour. LSV has to be found by the recursive solution.
+
+The input to the solution process will be
+the list L of viewpoints  V1, V2, ..., Vn,
+and also the minimum allowed height (MAH = Minimum Allowed Height)
+of the first selected viewpoint. We will see soon why.
+
+Recursive solution divides (conceptually) the list of viewpoints into two parts:
+the first viewpoint (V1), and the rest of the tour RT = [V2, V3, ..., Vn]
+containing all remaining viewpoints, in their original order.
+
+   +--+   +--+--+--+--+--+--+--+
+   |V1|   |V2|V3|   ....    |Vn|
+   +--+   +--+--+--+--+--+--+--+
+
+Now, whatever the final solution will be, for V1 there are only two
+options: Either it will be NOT included in LSV or it will be included.
+
+Thus, the  solution strategy is to explore both options:
+Construct a separate solution for each of the two options, 
+and choose that solution which produces longer list of viewpoints.
+
+The first option (V1 not included in LSV) is easy to process,
+just ask the recursion to find the solution for only RT and pass to it
+also the value unchanged value of MAH.
+
+If the height of V1 is smaller than MAH, it is not possible to include V1
+in the solution, the second option cannot be considered, and therefore
+the list returned from the just mentioned recursive call
+is also returned as complete solution LSV.
+
+The second option means that the height of the first selected
+viewpoint in RT must bigger than the height of V1,
+its height must be at least 1 plus the height of V1.
+Thus, the recursive function which finds a solution for RT
+takes also as an input parameter the height of V1 increased by 1.
+When the recursive call returns the list of selected viewpoints for RT,
+then V1 is prepended to that list
+and this completes the second option.
+
+Finally, the longer list of the two is returned as a solution LSV.
+When their lengths are the same, any of them may be used.
+
+------------------------------------------------------------------
+Solution implementation
+------------------------------------------------------------------
+
+A proposed simple recursive function F:
+
+Input:
+   L         : List of viewpoint heights, in the order they appear on the road.
+               This parameter is not changed in any of the function calls.
+   Icurr     : Index of the first item in the currently processed part
+               of L.
+   MinHeight : The minimum acceptable height of the first viewpoint in the
+               returned list (Result) of selected viewpoints.
+Output:
+      Result : List of selected viewpoints, satisfying conditions 1. and 2.
+      (Note that only the length of the result should be printed in output.)
+
+Solution description:
+
+  If the part of L to be processed is empty, F returns empty list Result.
+  That happens when the index Icurr points past the end of L.
+  Otherwise, the following part of the function is performed.
+
+  First, F is called recursively, with Icurr parameter value increased by 1,
+  and with unchanged value of the minHeight parameter.
+  Next, the value of L at position Icurr checked.
+  If it is smaller than the minHeight Value, the list produced
+  by the recursive call is returned a a result.
+  If it is not smaller than the minHeight Value, the second recursive call
+  is performed, again with Icurr parameter value increased by 1,
+  and also with parmeter minHeight set to the value of the L at position Icurr
+  increased by 1.  After that, the list returned from the second recursive 
+  call is prepended with the the value in L at position Icurr.
+
+  Finaly, F returns as its result the longer one of the two current lists.
+  If the lengths of the lists are equal, any one of them may be returned as the result.
+
+------------------------------------------------------------------
+'''
+
+def task05( viewPointsList ):
+    # your solution here
+    pass
+
+
+
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+#               I N P U T    R E A D I N G
+taskNo = int(input())
+Nlists = int(input())
+inputLists = []
+for k in range(Nlists):
+    oneList = list(map(int, input().split()))
+    inputLists.append(oneList)
+
+# * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+#             P R O C E S S I N G
+
+t1 = time.time()
+for aList in inputLists:
+    if taskNo == 1:  task01( aList[0], aList[1] )
+    if taskNo == 2:  task02( aList[0], aList[1] )
+    if taskNo == 3:  task03( aList )
+    if taskNo == 4:  task04( aList ) # number of oranges and paket prices
+    if taskNo == 5:  task05( aList )
+
+t2 = time.time()
+# print( 'time', str(t2-t1)[:5] )
+
+</pre>
+
+
+
+<hr>
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking.
+The public data set is stored also in the upload system and each time a student submits a solution
+it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="getdata.php?task=practices06b&item=datapub.zip"><b>Link to the public data set</b></a>
+</p>
+
+</div>
+
+</body>
+</html>

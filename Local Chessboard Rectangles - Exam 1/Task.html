@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="default.css" />
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+<div class="main">
+
+ <h3><font color="brown">PGE Exam Problem</font></h3>
+
+<h2><font color="blue">Local Chessboard Rectangles</font></h2>
+
+<p align="justify">
+
+Let us consider a rectangular array with <i>R</i> rows and <i>C</i> columns, containing numerical values. <br>
+A <b>query</b> related to the array is a sequence of four integers <i>R</i><sub>1</sub>, <i>C</i><sub>1</sub>, <i>R</i><sub>2</sub>, <i>C</i><sub>2</sub>.<br>
+A query is considered to be <b>valid</b> when
+&nbsp;&nbsp;&nbsp; 0 &le; <i>R</i><sub>1</sub> &le; <i>R</i><sub>2</sub> &lt; <i>R</i>  and   0 &le; <i>C</i><sub>1</sub> &le; <i>C</i><sub>2</sub> &lt; <i>C</i>. <br>
+
+A query is associated with a <b>query rectangle</b> which is
+a rectangular area in the array. The uppermost and the leftmost cell
+of the area is in row <i>R</i><sub>1</sub> and in column <i>C</i><sub>1</sub>. The bottommost and the rightmost
+cell of the area is in row <i>R</i><sub>2</sub> and in column <i>C</i><sub>2</sub>.
+<br><br>
+
+Let us consider a rectangular area <i>R</i> in a given array of integers (the area may be even the array itself). <br>
+
+A rectangular area <i>R</i> in a 2d array is a <b>chessboard rectangle</b> with values
+<i>v</i><sub>1</sub> and <i>v</i><sub>2</sub> when:
+<ol>
+<li> A value in a cell of <i>R</i> is either <i>v</i><sub>1</sub> or <i>v</i><sub>2</sub>.
+<li> Any two adjacent cells in <i>R</i> do not contain the same values.
+<li> The value in the upper left corner cell of <i>R</i> is <i>v</i><sub>1</sub>.
+</ol>
+Note that a rectangle consisting of one cell is a chessboard rectangle.
+
+
+<br><br>
+
+For example, consider the following array:
+<pre>
+5 5 5 8 9 8
+3 7 3 2 3 2
+8 5 2 3 2 3
+3 7 3 2 3 2
+7 3 7 1 2 3
+</pre>
+Some (not all!) chessboard rectangles in the given array are:
+
+<pre>
+3 2 3 2
+2 3 2 3
+3 2 3 2
+</pre>
+The query corresponding to the rectangle would be 1 2 3 5.
+
+<pre>
+3 7 3
+7 3 7
+</pre>
+The query corresponding to the rectangle would be 3 0 4 2.
+
+<pre>
+5
+7
+5
+7
+</pre>
+The query corresponding to the rectangle would be 0 1 3 1.
+<br>
+On the other hand, the following two queries do not correspond to a chessboard rectangle: <br>
+1 1 3 3   The rectangle contains more then two different values. <br>
+0 0 0 3   There are two same values 5 and 5 in adjacent cells.
+
+
+
+
+<!-- T H E   T A S K  -------------------------------------------------------------------------------------------------------------------- -->
+
+<h3><font color="blue">The task</font></h3>
+
+An array of integers is given. Also a set of valid queries is given.
+For each query, decide whether the query rectangle is a chessboard rectangle.
+
+ <hr>
+
+
+ <br>
+ <br>
+ <br>
+
+<!-- I N P U T  -------------------------------------------------------------------------------------------------------------------- -->
+
+<h3><font color="blue">Input</font></h3>
+<p align="justify">
+The first input line contains three positive integers <i>R</i>, <i>C</i>, <i>NQ</i> separated by space.
+They represent, in this order, the number of rows in the array, the number
+of columns in the array  and the number of queries to process.  <br>
+Next, there are <i>R</i> lines of input, each contains <i>C</i> values separated by spaces.
+Each line contains values of the corresponding array row.
+Finally, there are <i>NQ</i> rows, each contains one query.
+The query items are separated by spaces.
+<br>
+The size of the array is at most 500 &times; 500,
+the number of queries is at most 1000.
+The values in the array are positive and less then 100.
+
+
+
+</p>
+
+<h3><font color="blue">Output</font></h3>
+<p align="justify">
+For each query, in the order they appear in the input,
+print again a line with the query in the same format it appears in the output,
+and then, on the same line print either string 'True' or string 'False' (without quotes)
+depending on whether the corresponding query rectangle is a chessboard rectangle.
+There should be one space between the query and the result string.
+</p>
+
+
+
+
+<center>
+<table width="95%">
+	<col width="22%"/>
+	<col width="30%"/>
+	<col width="30%"/>
+	<col width="5%"/>
+	<col width="10%"/>
+    <tr>
+
+<td valign="top">
+	<h3><font color="blue">Example 1</font></h3>
+<b>Input</b><br>
+<pre>
+5 6 5
+5 5 5 8 9 8
+3 7 3 2 3 2
+8 5 2 3 2 3
+3 7 3 2 3 2
+7 3 7 1 2 3
+1 2 3 5
+3 0 4 2
+0 1 3 1
+1 1 3 3
+0 0 0 3
+</pre>
+
+<b>Output</b><br>
+<pre>
+1 2 3 5 True
+3 0 4 2 True
+0 1 3 1 True
+1 1 3 3 False
+0 0 0 3 False
+</pre>
+
+
+</td>
+
+<td valign="top">
+	<h3><font color="blue">Example 2</font></h3>
+<b>Input</b><br>
+<pre>
+5 8 7
+1 7 1 7 1 7 1 4
+7 1 7 1 7 1 7 4
+1 7 1 7 1 7 1 9
+6 4 2 3 4 4 6 1
+2 2 8 4 6 8 2 9
+1 4 1 4
+0 0 1 4
+1 3 3 4
+0 5 2 5
+1 2 3 3
+0 0 2 6
+2 0 3 6
+</pre>
+
+<b>Output</b><br>
+<pre>
+1 4 1 4 True
+0 0 1 4 True
+1 3 3 4 False
+0 5 2 5 True
+1 2 3 3 False
+0 0 2 6 True
+2 0 3 6 False
+</pre>
+
+
+</td>
+
+<td valign="top">		
+	<h3><font color="blue">Example 3</font></h3>
+<b>Input</b><br>
+<pre>
+10 15 10
+9 8 8 9 6 9 6 9 6 9 6 9 6 1 8
+9 7 9 7 9 6 9 6 9 6 9 6 9 8 7
+1 9 7 9 6 9 6 9 6 9 6 9 6 4 7
+2 8 5 3 9 6 9 6 9 3 5 6 9 1 6
+8 2 1 9 6 9 6 9 6 9 6 9 6 5 4
+2 8 7 3 9 6 9 6 9 6 9 6 9 4 4
+8 2 4 6 6 9 6 9 6 9 6 9 6 6 6
+2 8 6 4 9 6 9 6 9 6 9 6 9 2 3
+5 9 4 6 6 9 6 9 6 9 6 9 6 4 2
+6 4 6 4 9 6 9 6 9 6 9 6 9 5 3
+6 2 9 10
+1 3 6 11
+4 6 8 12
+0 10 3 13
+1 1 2 10
+0 4 9 12
+3 0 7 1
+5 6 5 13
+3 9 3 10
+4 2 5 8
+</pre>
+
+<b>Output</b><br>
+<pre>
+6 2 9 10 False
+1 3 6 11 False
+4 6 8 12 True
+0 10 3 13 False
+1 1 2 10 False
+0 4 9 12 False
+3 0 7 1 True
+5 6 5 13 False
+3 9 3 10 True
+4 2 5 8 False
+</pre>
+</td>
+
+    </tr>
+</table>
+</center>
+
+
+
+
+<hr>
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking.
+The public data set is stored also in the upload system and each time a student submits a solution
+it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="getdata.php?task=z1chessrect&item=datapub.zip"><b>Link to the public data set</b></a>
+</p>
+
+</div>
+
+
+</body>
+</html>
